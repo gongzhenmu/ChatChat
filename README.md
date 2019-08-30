@@ -1,2 +1,3 @@
 # ChatChat-
 CS408 Team Project 
+People communicate with one another everyday but people meeting for the first time are often oblivious about people’s common interests, which would likely result in their conversations being cut short. Our android app aims to remedy this situation by allowing people to connect in groups based on the topics they are interested in, for example, gamers are able to search for gaming groups of which they have a mutual interest in. Furthermore, our app offers ways for people to connect within sub groups of their topic, which allows clients to further narrow down to specific knowledge of which they share.

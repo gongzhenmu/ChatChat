@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpActivity">
+
+    <Button
+        android:id="@+id/confirm"
+        android:layout_width="236dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/password"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/colorAccent"
+        android:text="CONFIRM"
+        android:textColor="@android:color/white" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="362dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/email"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="Input password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/chatName"
+        android:layout_width="362dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:hint="Input chatName"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="111dp" />
+
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="362dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/chatName"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="Input email"
+        android:inputType="textPersonName" />
+</RelativeLayout>

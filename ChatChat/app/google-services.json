@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "369659596234",
+    "firebase_url": "https://cs408-project.firebaseio.com",
+    "project_id": "cs408-project",
+    "storage_bucket": "cs408-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:369659596234:android:22bf1e1b2a3c24450ed333",
+        "android_client_info": {
+          "package_name": "com.example.chatchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "369659596234-96vaofan51it5g7uev7b1bhullg7bjqq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUVjAIeD1SXFiPanvK-77oYWIQZ4p-31o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "369659596234-96vaofan51it5g7uev7b1bhullg7bjqq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

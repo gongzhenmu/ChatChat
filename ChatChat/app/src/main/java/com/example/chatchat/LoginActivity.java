@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailInput;
     private EditText passwordInput;
     private Button login;
+    private TextView forgetPassword;
 
     private String email;
     private String password;
@@ -34,9 +36,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        emailInput = (EditText) findViewById(R.id.email);
-        passwordInput = (EditText) findViewById(R.id.password);
-        login = (Button) findViewById(R.id.login_bt);
+        emailInput = findViewById(R.id.email);
+        passwordInput = findViewById(R.id.password);
+        login = findViewById(R.id.login_bt);
+        forgetPassword = findViewById(R.id.forgetPassword);
         firebaseAuth = FirebaseAuth.getInstance();
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +48,15 @@ public class LoginActivity extends AppCompatActivity {
                 password = passwordInput.getText().toString().trim();
                 if (!TextUtils.isEmpty(emailInput.getText()) && !TextUtils.isEmpty(passwordInput.getText())){
                     loginUser(email, password);
-                }            }
+                }
+            }
+        });
+        forgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
+                startActivity(intent);
+            }
         });
     }
 

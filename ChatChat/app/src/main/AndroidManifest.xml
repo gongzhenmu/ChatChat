@@ -30,7 +30,7 @@
             android:name=".MainPageActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".ChangeUserNameActivity"
+            android:name=".ChangePasswordActivity"
             android:theme="@style/AppTheme" />
     </application>
 

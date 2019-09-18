@@ -9,24 +9,16 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-        <TextView
-            android:id="@+id/userName"
-            android:layout_width="299dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="100dp"
-            android:layout_marginBottom="201dp"
-            />
         <Button
-            android:id="@+id/change_userName"
+            android:id="@+id/change_passWord"
             android:layout_width="261dp"
             android:layout_height="50dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="201dp"
             android:backgroundTint="@color/colorAccent"
             android:layout_gravity="center"
-            android:text="Change User Name"
+            android:text="Change Password"
             android:textColor="@android:color/white" />
-
-
     </LinearLayout>
 
 </ScrollView>

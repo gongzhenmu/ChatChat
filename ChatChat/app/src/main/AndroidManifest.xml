@@ -29,6 +29,9 @@
         <activity
             android:name=".MainPageActivity"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ChangeUserNameActivity"
+            android:theme="@style/AppTheme" />
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

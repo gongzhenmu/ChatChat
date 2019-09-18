@@ -2,5 +2,16 @@
     <string name="app_name">ChatChat</string>
     <string name="login">Login</string>
     <string name="SignUp">Sign Up</string>
-
+    >
+    <string-array name="categories">
+        <item>Choose a topic for your chatroom</item>
+        <item>Sports</item>
+        <item>News</item>
+        <item>Games</item>
+        <item>Movies</item>
+        <item>Music</item>
+        <item>Business</item>
+        <item>Tech</item>
+        <item>Travel</item>item>
+    </string-array>
 </resources>

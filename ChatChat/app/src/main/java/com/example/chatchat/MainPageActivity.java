@@ -7,6 +7,9 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+
 
 public class MainPageActivity extends AppCompatActivity {
 
@@ -18,9 +21,8 @@ public class MainPageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainpage);
-
-        imgUpload = (Button) findViewById(R.id.MainPage_changeImg);
-         exploreButton = (Button)findViewById(R.id.main_button_explore);
+        imgUpload = findViewById(R.id.MainPage_changeImg);
+         exploreButton = findViewById(R.id.main_button_explore);
 
         imgUpload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,23 +39,11 @@ public class MainPageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
     }
-
-
-       
-
-
     
    private void changeImg(){
         Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
         startActivity(intent);
-
-
-
-
     }
 
 

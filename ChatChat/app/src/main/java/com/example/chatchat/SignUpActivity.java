@@ -41,10 +41,10 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        emailInput = (EditText) findViewById(R.id.email);
-        passwordInput = (EditText) findViewById(R.id.password);
-        chatNameInput = (EditText) findViewById(R.id.chatName);
-        confirm = (Button) findViewById(R.id.confirm);
+        emailInput = findViewById(R.id.email);
+        passwordInput = findViewById(R.id.password);
+        chatNameInput = findViewById(R.id.chatName);
+        confirm = findViewById(R.id.confirm);
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         confirm.setOnClickListener(new View.OnClickListener() {

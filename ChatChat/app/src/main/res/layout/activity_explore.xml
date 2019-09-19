@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id = "@+id/explore_sports"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = "Sports"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:background="@color/colorAccent"
+        />
+    <Button
+        android:id = "@+id/explore_news"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = "News"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:background="@color/colorAccent"
+        />
+    <Button
+        android:id = "@+id/explore_games"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = "Games"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:background="@color/colorAccent"
+        />
+    <Button
+        android:id = "@+id/explore_movies"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = "Movies"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:background="@color/colorAccent"
+        />
+    <Button
+        android:id = "@+id/explore_music"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = "Music"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:background="@color/colorAccent"
+        />
+    <Button
+        android:id = "@+id/explore_business"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = "Business"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:background="@color/colorAccent"
+        />
+    <Button
+        android:id = "@+id/explore_tech"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = "Tech"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:background="@color/colorAccent"
+        />
+    <Button
+        android:id = "@+id/explore_travel"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = "Travel"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:background="@color/colorAccent"
+        />
+    <Button
+        android:onClick="showCreateChat"
+        android:id = "@+id/explore_create"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text = "Create"
+        android:background="@color/colorPrimary"
+        />
+</LinearLayout>

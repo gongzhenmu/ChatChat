@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="450dp"
+    android:scrollbarSize="8dp"
+    android:background="@color/common_google_signin_btn_text_dark_disabled"
+    android:layout_gravity="center">
+
+
+    <EditText
+        android:id="@+id/createchat_name_text"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/createchat_name_tag"
+        android:layout_alignTop="@id/createchat_name_tag"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="-10dp"
+        android:text="" />
+
+    <Spinner
+        android:id="@+id/createchat_category_spinner"
+        android:layout_width="315dp"
+        android:layout_height="39dp"
+        android:layout_alignLeft="@+id/createchat_name_tag"
+        android:layout_alignTop="@+id/createchat_name_tag"
+        android:layout_alignRight="@id/createchat_name_text"
+        android:layout_marginTop="55dp"
+        android:layout_marginRight="5dp"
+        android:scrollbarSize="6dp"
+        android:entries="@array/categories"
+        android:spinnerMode = "dialog"
+        />
+    <TextView
+        android:id="@+id/createchat_name_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="60dp"
+        android:text="Chat Name:"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/createchat_des_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description: "
+        android:textSize="18sp"
+        android:layout_alignLeft="@+id/createchat_name_tag"
+        android:layout_alignTop="@id/createchat_category_spinner"
+        android:layout_marginTop="65dp"
+        />
+    <EditText
+        android:id = "@+id/createchat_des_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_alignTop="@id/createchat_des_tag"
+        android:layout_alignLeft="@id/createchat_des_tag"
+        android:layout_marginTop="30dp"
+        android:lines = "7"
+        android:background="@drawable/edittext_border"
+        />
+
+    <Button
+        android:id = "@+id/createchat_button_create"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="125dp"
+        android:text="Create"
+        android:backgroundTint="@color/colorAccent"
+        android:textColor="@android:color/white"
+        />
+
+
+</RelativeLayout>

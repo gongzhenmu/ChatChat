@@ -17,7 +17,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import androidx.annotation.NonNull;
@@ -26,15 +25,18 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
+    private Button loginButton;
+    private Button signUpButton;
+    private SignInButton google_sign_in_button;
     private final int RC_SIGN_IN = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button loginButton = findViewById(R.id.login_bt);
-        Button signUpButton = findViewById(R.id.signUp_bt);
-        SignInButton google_sign_in_button = findViewById(R.id.sign_in_button);
+        loginButton = findViewById(R.id.login_bt);
+        signUpButton = findViewById(R.id.signUp_bt);
+        google_sign_in_button = findViewById(R.id.sign_in_button);
 
         mAuth = FirebaseAuth.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

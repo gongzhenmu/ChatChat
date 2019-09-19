@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,26 +11,31 @@
         android:id="@+id/signUp_bt"
         android:layout_width="236dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/login_bt"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="158dp"
+        android:layout_marginTop="30dp"
         android:background="#0099ff"
         android:text="@string/SignUp"
-        android:textSize="14sp"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="258dp" />
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
 
     <Button
         android:id="@+id/login_bt"
         android:layout_width="236dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/sign_in_button"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="237dp"
+        android:layout_marginTop="30dp"
+        android:background="#0099ff"
         android:text="@string/login"
-        android:textColor="@android:color/white"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="322dp" />
+        android:textColor="@android:color/white" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="236dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
 
 
 </RelativeLayout>

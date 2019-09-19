@@ -43,6 +43,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 email = emailInput.getText().toString().trim();
                 password = passwordInput.getText().toString().trim();
+                if(TextUtils.isEmpty(emailInput.getText())){
+                    Toast.makeText(LoginActivity.this, "Please enter a valid email", Toast.LENGTH_LONG).show();
+                }
+                if(TextUtils.isEmpty(passwordInput.getText())){
+                    Toast.makeText(LoginActivity.this, "Please enter a valid password", Toast.LENGTH_LONG).show();
+                }
                 if (!TextUtils.isEmpty(emailInput.getText()) && !TextUtils.isEmpty(passwordInput.getText())){
                     loginUser(email, password);
                 }            }

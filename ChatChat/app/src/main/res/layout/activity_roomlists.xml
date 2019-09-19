@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/roomlists_recyclerview"
+        android:id="@+id/activity_chatroom_list_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

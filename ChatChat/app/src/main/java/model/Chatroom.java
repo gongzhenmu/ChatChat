@@ -21,6 +21,12 @@ public class Chatroom {
     private String creater_name;
     private String date;
 
+    public Chatroom()
+    {
+
+    }
+
+
     public Chatroom(String name, String category, String creater_name, String date)
     {
         chatroom.put(CHAT_NAME, name);
@@ -35,6 +41,18 @@ public class Chatroom {
     {
         chatroom.put(DESCRIPTION, des);
     }
+    public void setLikes(String likes)
+    {
+        chatroom.put(LIKES, likes);
+    }
+
+    public void setDate(String date)
+    {
+        chatroom.put(DATE, date);
+    }
+
+
+
 
     public void like()
     {

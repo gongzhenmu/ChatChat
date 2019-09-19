@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id = "@+id/categroy_sports"
+        android:id = "@+id/explore_sports"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -16,7 +16,7 @@
         android:background="@color/colorAccent"
         />
     <Button
-        android:id = "@+id/categroy_news"
+        android:id = "@+id/explore_news"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -28,7 +28,7 @@
         android:background="@color/colorAccent"
         />
     <Button
-        android:id = "@+id/categroy_games"
+        android:id = "@+id/explore_games"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -40,7 +40,7 @@
         android:background="@color/colorAccent"
         />
     <Button
-        android:id = "@+id/categroy_movies"
+        android:id = "@+id/explore_movies"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -52,7 +52,7 @@
         android:background="@color/colorAccent"
         />
     <Button
-        android:id = "@+id/categroy_music"
+        android:id = "@+id/explore_music"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -64,7 +64,7 @@
         android:background="@color/colorAccent"
         />
     <Button
-        android:id = "@+id/categroy_business"
+        android:id = "@+id/explore_business"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -76,7 +76,7 @@
         android:background="@color/colorAccent"
         />
     <Button
-        android:id = "@+id/categroy_tech"
+        android:id = "@+id/explore_tech"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -88,7 +88,7 @@
         android:background="@color/colorAccent"
         />
     <Button
-        android:id = "@+id/categroy_travel"
+        android:id = "@+id/explore_travel"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -101,7 +101,7 @@
         />
     <Button
         android:onClick="showCreateChat"
-        android:id = "@+id/category_create"
+        android:id = "@+id/explore_create"
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:layout_gravity="center_horizontal"

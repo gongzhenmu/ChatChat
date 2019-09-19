@@ -1,17 +1,15 @@
 package Adapter;
 
 import android.content.Context;
-import android.view.ContextMenu;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.chatchat.CategoryActivity;
 import com.example.chatchat.R;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
@@ -33,9 +31,11 @@ public class ChatRoomListAdapter extends RecyclerView.Adapter<ChatRoomListAdapte
     @NonNull
     @Override
     public ChatroomHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Log.d("Adapter", "onCreated: called");
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_chatroom, parent, false);
         ChatroomHolder chatroomHolder = new ChatroomHolder(v);
         return chatroomHolder;
+
     }
 
     @Override
@@ -51,11 +51,18 @@ public class ChatRoomListAdapter extends RecyclerView.Adapter<ChatRoomListAdapte
         });
     }
 
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView)
+    {
+        super.onAttachedToRecyclerView(recyclerView);
+    }
+
+
 
 
     @Override
     public int getItemCount() {
-        return 0;
+        return chatrooms.size();
     }
 
     public static class ChatroomHolder extends RecyclerView.ViewHolder

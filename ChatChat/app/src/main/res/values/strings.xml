@@ -2,7 +2,7 @@
     <string name="app_name">ChatChat</string>
     <string name="login">Login</string>
     <string name="SignUp">Sign Up</string>
-    >
+
     <string-array name="categories">
         <item>Choose a topic for your chatroom</item>
         <item>Sports</item>
@@ -14,4 +14,7 @@
         <item>Tech</item>
         <item>Travel</item>item>
     </string-array>
+
+    <string name="logout">Logout</string>
+
 </resources>

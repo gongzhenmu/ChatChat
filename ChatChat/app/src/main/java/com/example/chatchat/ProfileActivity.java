@@ -19,7 +19,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ProfileActivity extends AppCompatActivity {
-    private Button btnChangeUid, btnLogout;
+
+    private Button btnChangeUid, btnLogout, btnChangePassword;
     private ImageView imgProfilePic;
     private TextView txtName, txtEmail;
     private String imgDir = "https://firebasestorage.googleapis.com/v0/b/cs408-project.appspot.com/o/";
@@ -32,6 +33,8 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         btnChangeUid = (Button) findViewById(R.id.profile_changeUID);
+
+        btnChangePassword = (Button) findViewById(R.id.profile_changePassword);
         btnLogout = (Button) findViewById(R.id.profile_logout);
         imgProfilePic = (ImageView) findViewById(R.id.profile_image);
         txtName = (TextView) findViewById(R.id.profile_userName);
@@ -64,8 +67,32 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+        btnChangeUid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ChangeUserNameActivity.class);
+                startActivity(intent);
+
+            }
+        });
+        btnChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ChangePasswordActivity.class);
+                startActivity(intent);
 
 
+            }
+        });
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     @Override

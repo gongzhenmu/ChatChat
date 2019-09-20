@@ -12,7 +12,7 @@ public class Chatroom {
     public static final String LIKES = "likes";
     public static final String CREATER = "creater_name";
     public static final String DATE = "date";
-
+    public static final String CHAT_ID = "chat_ic";
 
     private String category;
     private String chatName;
@@ -36,6 +36,12 @@ public class Chatroom {
         chatroom.put(DATE, date);
 
     }
+
+    public void setChatId(String id)
+    {
+        chatroom.put(CHAT_ID, id);
+    }
+
 
     public void setDescription(String des)
     {
@@ -66,5 +72,5 @@ public class Chatroom {
     public String getCreater_name(){return chatroom.get(CREATER);}
     public String getDescription(){return chatroom.get(DESCRIPTION);}
     public String getLikes(){return chatroom.get(LIKES);}
-
+    public String getChatId(){return chatroom.get(CHAT_ID);}
 }

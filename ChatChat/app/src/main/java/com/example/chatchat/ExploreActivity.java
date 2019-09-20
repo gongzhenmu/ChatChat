@@ -25,6 +25,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.w3c.dom.Document;
+
 import java.util.Calendar;
 
 public class ExploreActivity extends AppCompatActivity {
@@ -118,13 +120,18 @@ public class ExploreActivity extends AppCompatActivity {
                 category = categorySpinner.getSelectedItem().toString();
                 newChatRoom = new Chatroom(chatname, category, username, date);
                 newChatRoom.setDescription(description);
-                db.collection("Chatroom").add(newChatRoom.getChatroom()).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                DocumentReference chatRef = db.collection("Chatroom").document();
+                String id = chatRef.getId();
+                newChatRoom.setChatId(id);
+                chatRef.set(newChatRoom.getChatroom()).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
+                    public void onSuccess(Void aVoid) {
                         createChatDialog.dismiss();
                         Toast.makeText(ExploreActivity.this, "created", Toast.LENGTH_LONG).show();
                     }
-                }).addOnFailureListener(new OnFailureListener() {
+                }).
+
+                addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(ExploreActivity.this, "fail to create an account", Toast.LENGTH_LONG).show();

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">ChatChat</string>
-    <string name="login">Login</string>
+    <string name="login">Log in with email</string>
     <string name="SignUp">Sign Up</string>
 
     <string-array name="categories">
@@ -16,5 +16,4 @@
     </string-array>
 
     <string name="logout">Logout</string>
-
 </resources>

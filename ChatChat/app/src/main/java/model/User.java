@@ -8,15 +8,14 @@ public class User {
     public static final String CHAT_NAME = "chatName";
     public static final String USER_EMAIL = "userEmail";
     public static final String USER_ID = "userId";
+    public static final String IMAGE = "imgurl";
 
-    private String chatName;
-    private String userEmail;
-    private String userId;
 
     public User(String chatName, String userEmail, String userId) {
         user.put(CHAT_NAME, chatName);
         user.put(USER_EMAIL, userEmail);
         user.put(USER_ID, userId);
+        user.put(IMAGE, "");
     }
 
     public Map<String, String> getUser() {
@@ -40,10 +39,10 @@ public class User {
     }
 
     public void setUserId(String userId) {
-        user.put(USER_EMAIL, userEmail);
+        user.put(USER_EMAIL, userId);
     }
 
     public void setUserEmail(String userEmail) {
-        user.put(USER_ID, userId);
+        user.put(USER_ID, userEmail);
     }
 }

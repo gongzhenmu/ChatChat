@@ -18,6 +18,8 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private Button signUpButton;
     private SignInButton google_sign_in_button;
     private final int RC_SIGN_IN = 1;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.login_bt);
         signUpButton = findViewById(R.id.signUp_bt);
         google_sign_in_button = findViewById(R.id.sign_in_button);
-
         mAuth = FirebaseAuth.getInstance();
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -97,10 +100,32 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Intent intent = new Intent(MainActivity.this, MainPageActivity.class);
-                            startActivity(intent);
-                            finish();
+                            db = FirebaseFirestore.getInstance();
+                            mAuth = FirebaseAuth.getInstance();
+                            final String uid = mAuth.getCurrentUser().getUid();
+                            db.collection("Users").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    DocumentSnapshot myDoc = task.getResult();
+                                    if (myDoc.getData() == null) {
+                                        //create a new user
+                                        String email = mAuth.getCurrentUser().getEmail();
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Intent intent = new Intent(MainActivity.this, CreateProfileActivity.class);
+                                        Bundle extras = new Bundle();
+                                        extras.putString("uid", uid);
+                                        extras.putString("email", email);
+                                        intent.putExtras(extras);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Intent intent = new Intent(MainActivity.this, MainPageActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                }
+                            });
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(MainActivity.this, " credential failed", Toast.LENGTH_LONG).show();

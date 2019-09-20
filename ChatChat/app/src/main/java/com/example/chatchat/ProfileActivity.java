@@ -20,7 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 public class ProfileActivity extends AppCompatActivity {
-    private Button btnChangeUid,btnLogout;
+    private Button btnChangeUid,btnLogout,btnChanePass;
     private ImageView imgProfilePic;
     private TextView txtName,txtEmail;
     private String imgDir = "https://firebasestorage.googleapis.com/v0/b/cs408-project.appspot.com/o/";
@@ -36,9 +36,11 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         btnChangeUid = (Button)findViewById(R.id.profile_changeUID);
         btnLogout = (Button)findViewById(R.id.profile_logout);
+        btnChanePass = (Button)findViewById(R.id.profile_changePass);
         imgProfilePic = (ImageView)findViewById(R.id.profile_image);
         txtName = (TextView) findViewById(R.id.profile_userName);
         txtEmail = (TextView) findViewById(R.id.profile_email);
+
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         db.collection("Users").document(mAuth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -64,6 +66,18 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),ImageUpload.class);
                 startActivity(intent);
+
+            }
+        });
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                startActivity(intent);
+                finish();
+
 
             }
         });

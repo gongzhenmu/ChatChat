@@ -58,6 +58,17 @@
 
          />
     <Button
+        android:id="@+id/profile_changePass"
+        android:background="#99ff99"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="50dp"
+        android:text="change password"
+        android:gravity="center"
+        android:textSize="30sp"
+
+        />
+    <Button
         android:id="@+id/profile_logout"
         android:background="@color/colorAccent"
         android:layout_width="match_parent"

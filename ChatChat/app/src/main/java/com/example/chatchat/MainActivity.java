@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(SignUpActivity);
             }
         });
+
     }
 
 
@@ -107,5 +108,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+
 
 }

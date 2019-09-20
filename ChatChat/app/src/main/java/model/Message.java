@@ -1,10 +1,11 @@
 package model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Message {
-    private Map<String, String> message;
-    public static final String MESSAGE = "message";
+    private Map<String, String> message = new HashMap<>();
+    public static final String CONTENT = "content";
     public static final String USERNAME = "username";
     public static final String URL = "url";
     public static final String USER_ID = "user_id";
@@ -18,7 +19,7 @@ public class Message {
 
     public Message(String mes, String username, String url, String user_id,String date)
     {
-        message.put(MESSAGE, mes);
+        message.put(CONTENT, mes);
         message.put(USERNAME, user_id);
         message.put(URL, url);
         message.put(USER_ID, user_id);
@@ -26,9 +27,11 @@ public class Message {
 
     }
 
-    public String getMessage()
+    public Map<String, String> getMessage(){return message;}
+
+    public String getContent()
     {
-        return message.get(MESSAGE);
+        return message.get(CONTENT);
     }
 
     public String getUsername()

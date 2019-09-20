@@ -1,0 +1,84 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context=".ProfileActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#00cccc"
+
+        >
+
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:clickable="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="100dp"
+            android:layout_marginEnd="100dp"
+            />
+        <TextView
+            android:id="@+id/profile_userName"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textColor="#ffffff"
+            android:text="adsdasdsa"
+            android:gravity="center"
+            android:textSize="30sp"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/profile_email"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="adsdasdsa"
+        android:gravity="center"
+        android:textSize="30sp"
+        />
+     <Button
+         android:id="@+id/profile_changeUID"
+         android:background="#99ff99"
+         android:layout_width="match_parent"
+         android:layout_marginTop="20dp"
+         android:layout_height="50dp"
+         android:text="change Uid"
+         android:gravity="center"
+         android:textSize="30sp"
+
+         />
+    <Button
+        android:id="@+id/profile_changePassword"
+        android:background="#99ff99"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="50dp"
+        android:text="change password"
+        android:gravity="center"
+        android:textSize="30sp"
+
+        />
+    <Button
+        android:id="@+id/profile_logout"
+        android:background="@color/colorAccent"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="50dp"
+        android:text="logout"
+        android:gravity="center"
+        android:textSize="30sp"
+
+        />
+
+
+</LinearLayout>

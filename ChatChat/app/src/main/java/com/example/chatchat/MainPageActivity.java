@@ -30,8 +30,9 @@ public class MainPageActivity extends AppCompatActivity {
 
 
     private void changeImg(){
-        Intent intent = new Intent(getApplicationContext(),ImageUpload.class);
+        Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
         startActivity(intent);
+
 
 
 

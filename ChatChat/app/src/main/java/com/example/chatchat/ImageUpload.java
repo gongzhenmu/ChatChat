@@ -122,9 +122,9 @@ public class ImageUpload extends AppCompatActivity {
                     System.out.println(downloadUriTask.toString());
                     if (downloadUri.toString() !=null) {
                         String imgurl = downloadUri.toString().substring(downloadUri.toString().lastIndexOf('/') + 1);
-                        Map<String, Object> map = new HashMap<>();
-                        map.put("imgurl", imgurl);
-                        db.collection("Users").document(mAuth.getUid()).collection("images").document(imgurl).set(map);
+//                        Map<String, Object> map = new HashMap<>();
+//                        map.put("imgurl", imgurl);
+                        db.collection("Users").document(mAuth.getUid()).update("imgurl",imgurl);
 
                     }
                     myBar.setVisibility(View.INVISIBLE);

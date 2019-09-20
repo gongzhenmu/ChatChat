@@ -5,23 +5,31 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import android.view.View;
-import android.widget.Button;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 
 public class MainPageActivity extends AppCompatActivity {
 
-    private Button btnChange;
+    private Button imgUpload;
     private Button exploreButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainpage);
-        Button logOutButton = findViewById(R.id.logout_bt);
-        exploreButton = (Button)findViewById(R.id.main_button_explore);
+
+        imgUpload = (Button) findViewById(R.id.MainPage_changeImg);
+         exploreButton = (Button)findViewById(R.id.main_button_explore);
+
+        imgUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeImg();
+
+            }
+        });
+       
         exploreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -30,14 +38,22 @@ public class MainPageActivity extends AppCompatActivity {
             }
         });
 
-        logOutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent LoginActivity = new Intent(MainPageActivity.this, LoginActivity.class);
-                startActivity(LoginActivity);
-                finish();
-            }
-        });
+
+
+    }
+
+
+       
+
+
+    
+   private void changeImg(){
+        Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
+        startActivity(intent);
+
+
+
+
     }
 
 

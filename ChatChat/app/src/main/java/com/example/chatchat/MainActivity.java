@@ -20,7 +20,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -125,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                 }
                             });
-
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(MainActivity.this, " credential failed", Toast.LENGTH_LONG).show();
@@ -133,6 +131,4 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
-
-
 }

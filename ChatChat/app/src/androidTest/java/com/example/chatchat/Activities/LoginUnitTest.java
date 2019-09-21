@@ -20,22 +20,18 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 @LargeTest
 public class LoginUnitTest {
 
-    private String stringToBetyped;
-
     @Rule
     public ActivityTestRule<MainActivity> activityRule
             = new ActivityTestRule<>(MainActivity.class);
 
     @Test
     public void mainPageButtonIsDisplayed() {
-        // Type text and then press the button.
         onView(withId(R.id.login_bt)).check(matches(withText("LOG IN WITH EMAIL")));
         onView(withId(R.id.login_bt)).perform(click());
     }
 
     @Test
     public void Login() {
-        // Type text and then press the button.
         onView(withId(R.id.login_bt)).perform(click());
         onView(withId(R.id.email)).perform(new TypeTextAction("user1@email.com"));
         onView(withId(R.id.password)).perform(new TypeTextAction("12345678"));

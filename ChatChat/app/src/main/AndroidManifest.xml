@@ -45,9 +45,12 @@
             android:name=".ChangePasswordActivity"
             android:theme="@style/AppTheme" />
         <activity
+<<<<<<< HEAD
             android:name=".ChangeUserNameActivity"
             android:theme="@style/AppTheme" />
         <activity
+=======
+>>>>>>> f48b878... google Sign in
             android:name=".CreateProfileActivity"
             android:label="@string/login"
             android:theme="@style/AppTheme" />

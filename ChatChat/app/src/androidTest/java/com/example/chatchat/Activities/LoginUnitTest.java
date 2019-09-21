@@ -19,7 +19,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 @LargeTest
 public class LoginUnitTest {
-
     @Rule
     public ActivityTestRule<MainActivity> activityRule
             = new ActivityTestRule<>(MainActivity.class);

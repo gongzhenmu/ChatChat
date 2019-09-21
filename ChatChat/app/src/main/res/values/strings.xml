@@ -2,6 +2,7 @@
     <string name="app_name">ChatChat</string>
     <string name="login">Log in with email</string>
     <string name="SignUp">Sign Up</string>
+<<<<<<< HEAD
     <string-array name="categories">
         <item>Choose a topic for your chatroom</item>
         <item>Sports</item>
@@ -14,5 +15,7 @@
         <item>Travel</item>item>
     </string-array>
 
+=======
+>>>>>>> 2e0b1e8... google authentication set up
     <string name="logout">Logout</string>
 </resources>

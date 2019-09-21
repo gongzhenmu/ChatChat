@@ -19,7 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ProfileActivity extends AppCompatActivity {
-
     private Button btnChangeUid, btnLogout, btnChangePassword;
     private ImageView imgProfilePic;
     private TextView txtName, txtEmail;
@@ -33,7 +32,6 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         btnChangeUid = (Button) findViewById(R.id.profile_changeUID);
-
         btnChangePassword = (Button) findViewById(R.id.profile_changePassword);
         btnLogout = (Button) findViewById(R.id.profile_logout);
         imgProfilePic = (ImageView) findViewById(R.id.profile_image);
@@ -80,8 +78,6 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ChangePasswordActivity.class);
                 startActivity(intent);
-
-
             }
         });
         btnLogout.setOnClickListener(new View.OnClickListener() {

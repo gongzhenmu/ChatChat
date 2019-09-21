@@ -2,6 +2,7 @@ package com.example.chatchat;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.view.View;
 import android.widget.Button;
 
@@ -12,7 +13,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 
 public class MainPageActivity extends AppCompatActivity {
-
     private Button imgUpload;
     private Button exploreButton;
 
@@ -20,6 +20,10 @@ public class MainPageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
         setContentView(R.layout.activity_mainpage);
         imgUpload = findViewById(R.id.MainPage_changeImg);
          exploreButton = findViewById(R.id.main_button_explore);
@@ -28,7 +32,6 @@ public class MainPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeImg();
-
             }
         });
        
@@ -39,6 +42,7 @@ public class MainPageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
     
    private void changeImg(){

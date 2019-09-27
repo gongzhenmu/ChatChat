@@ -46,6 +46,7 @@ public class ExploreActivity extends AppCompatActivity {
     private Chatroom newChatRoom;
     private Button createButton;
     private String date = Calendar.getInstance().getTime().toString();
+    private String inputRegex = "^[a-zA-Z0-9][\\w\\s]*[.,!?]*";
 
 
     private Button sportsButton;
@@ -118,26 +119,55 @@ public class ExploreActivity extends AppCompatActivity {
                 chatname = chatnameInput.getText().toString();
                 description = descriptionInput.getText().toString();
                 category = categorySpinner.getSelectedItem().toString();
-                newChatRoom = new Chatroom(chatname, category, username, date);
-                newChatRoom.setDescription(description);
-                DocumentReference chatRef = db.collection("Chatroom").document();
-                String id = chatRef.getId();
-                newChatRoom.setChatId(id);
-                chatRef.set(newChatRoom.getChatroom()).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        createChatDialog.dismiss();
-                        Toast.makeText(ExploreActivity.this, "created", Toast.LENGTH_LONG).show();
-                    }
-                }).
+                if(chatname.length() == 0 || description.length() == 0)
+                {
+                    Toast.makeText(ExploreActivity.this, "Empty Chat name or description.", Toast.LENGTH_LONG).show();
+                    //createChatDialog.dismiss();
+                }
+                else if(!chatname.matches(inputRegex))
+                {
+                    Toast.makeText(ExploreActivity.this, "Chat name contains invalid characters!", Toast.LENGTH_LONG).show();
+                }
+                else if(chatname.length() > 40)
+                {
+                    Toast.makeText(ExploreActivity.this, "Chat name too long, needs to be less than 40", Toast.LENGTH_LONG).show();
+                }
+                else if(category.equals("Choose a topic for your chatroom"))
+                {
+                    Toast.makeText(ExploreActivity.this, "Please select a category!", Toast.LENGTH_LONG).show();
+                }
+                else if(!description.matches(inputRegex))
+                {
+                    Toast.makeText(ExploreActivity.this, "Description contains invalid characters!", Toast.LENGTH_LONG).show();
+                }
+                else if(description.length() > 150)
+                {
+                    Toast.makeText(ExploreActivity.this, "Description too long, needs to less than 150", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    newChatRoom = new Chatroom(chatname, category, username, date);
+                    newChatRoom.setDescription(description);
+                    DocumentReference chatRef = db.collection("Chatroom").document();
+                    String id = chatRef.getId();
+                    newChatRoom.setChatId(id);
+                    chatRef.set(newChatRoom.getChatroom()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            createChatDialog.dismiss();
+                            Toast.makeText(ExploreActivity.this, "created", Toast.LENGTH_LONG).show();
+                        }
+                    }).
 
-                addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ExploreActivity.this, "fail to create an account", Toast.LENGTH_LONG).show();
+                            addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(ExploreActivity.this, "fail to create an account", Toast.LENGTH_LONG).show();
 
-                    }
-                });
+                                }
+                            });
+                }
+
             }
         });
         createChatDialog.show();

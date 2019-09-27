@@ -122,6 +122,7 @@ public class ExploreActivity extends AppCompatActivity {
                 if(chatname.length() == 0 || description.length() == 0)
                 {
                     Toast.makeText(ExploreActivity.this, "Empty Chat name or description.", Toast.LENGTH_LONG).show();
+                    //createChatDialog.dismiss();
                 }
                 else if(!chatname.matches(inputRegex))
                 {

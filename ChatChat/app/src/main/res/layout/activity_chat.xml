@@ -5,10 +5,11 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#e6e6e6"
     tools:context=".ChatActivity">
 
     <TextView
-        android:id="@+id/activity_chat_name"
+        android:id="@+id/activity_chat_title"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:text="RoomList"
@@ -16,39 +17,52 @@
         android:textSize="25sp"
         android:background="@color/colorPrimary"
         />
-    <Button
+    <ImageButton
+        android:id="@+id/activity_chat_button_info"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:background="@drawable/ic_info_button"
         android:layout_alignParentRight="true"
         />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/activity_chat_message_recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:layout_alignTop = "@+id/activity_chat_name"
+        android:layout_alignTop = "@+id/activity_chat_title"
         android:layout_marginTop="50dp"
-        android:layout_toTopOf="@+id/activity_chat_send_button"
+        android:layout_above="@+id/activity_chat_bottom_layout"
+
         />
 
-    <EditText
-        android:id="@+id/activity_chat_message_editText"
-        android:layout_width="345dp"
+    <RelativeLayout
+        android:id="@+id/activity_chat_bottom_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toStartOf="@+id/activity_chat_send_button"
-        android:layout_alignBottom="@id/activity_chat_send_button"
-        android:background="@drawable/edittext_border"
-        android:text="sending message" />
-    <Button
-        android:id="@+id/activity_chat_send_button"
-        android:text = "Send"
-        android:layout_width="60dp"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
-        android:gravity="center_horizontal"
-        android:layout_alignParentRight="true"
-        />
+        android:padding="5dp"
+        android:background="#fff"
+        android:layout_alignParentBottom="true">
+
+        <EditText
+            android:id="@+id/activity_chat_message_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/activity_chat_button_send"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:hint="Type a message..." />
+        <ImageButton
+            android:id="@+id/activity_chat_button_send"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/ic_send_button"
+            />
+    </RelativeLayout>
+
+
+
 
 
 </RelativeLayout>

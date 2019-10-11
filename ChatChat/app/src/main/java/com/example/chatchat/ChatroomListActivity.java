@@ -40,8 +40,6 @@ public class ChatroomListActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         category = getIntent().getStringExtra("category");
         chatrooms = new ArrayList<>();
-        Chatroom test = new Chatroom("testing from ChatRoomListActivity", "Sports", "Shikang", "19/09/19");
-        chatrooms.add(test);
         adapter = new ChatRoomListAdapter(chatrooms, ChatroomListActivity.this);
         rv.setAdapter(adapter);
 

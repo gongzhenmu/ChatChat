@@ -26,14 +26,14 @@ public class ProfileActivity extends AppCompatActivity {
     private String imgDir = "https://firebasestorage.googleapis.com/v0/b/cs408-project.appspot.com/o/";
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
-
+    private Button btnFeedback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         btnChangeUid = (Button) findViewById(R.id.profile_changeUID);
-
+        btnFeedback = (Button) findViewById(R.id.feedback);
         btnChangePassword = (Button) findViewById(R.id.profile_changePassword);
         btnLogout = (Button) findViewById(R.id.profile_logout);
         imgProfilePic = (ImageView) findViewById(R.id.profile_image);
@@ -93,6 +93,13 @@ public class ProfileActivity extends AppCompatActivity {
                         | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
+            }
+        });
+        btnFeedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), FeedbackActivity.class);
+                startActivity(intent);
             }
         });
     }

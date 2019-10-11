@@ -68,6 +68,19 @@
         android:textSize="30sp"
 
         />
+
+    <Button
+        android:id="@+id/feedback"
+        android:background="@color/colorAccent"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="50dp"
+        android:text="feedback"
+        android:gravity="center"
+        android:textSize="30sp"
+
+        />
+
     <Button
         android:id="@+id/profile_logout"
         android:background="@color/colorAccent"
@@ -79,6 +92,7 @@
         android:textSize="30sp"
 
         />
+
 
 
 </LinearLayout>

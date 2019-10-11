@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/bugfeedBack"
+            android:layout_width="359dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bugTitle"
+            android:ems="10"
+            android:hint="I encountered a bug when... "
+            android:inputType="textMultiLine"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/editText2"
+            android:layout_width="348dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:text="We appreciate your feedback!" />
+
+        <Button
+            android:id="@+id/sendFeedbackButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="submit"
+            android:layout_below="@id/featureSuggestion"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="300dp" />
+
+        <TextView
+            android:id="@+id/bugTitle"
+            android:layout_width="345dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/starbar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="13dp"
+            android:ems="10"
+            android:text="Is there any Bug you want to report?"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/featureTitle"
+            android:layout_width="345dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bugfeedBack"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="13dp"
+            android:ems="10"
+            android:text="Is any feature you want to improve?"
+            android:textSize="20dp" />
+        <EditText
+            android:id="@+id/featureSuggestion"
+            android:layout_width="359dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/featureTitle"
+            android:ems="10"
+            android:hint="I wish ... can be better "
+            android:inputType="textMultiLine"
+            android:layout_centerHorizontal="true" />
+
+        <RatingBar
+            android:id="@+id/starbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:numStars="5"
+            android:stepSize="0.8" />
+    </RelativeLayout>
+    >
+</LinearLayout>

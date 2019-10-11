@@ -2,6 +2,9 @@ package com.example.chatchat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,7 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private Button btnChangeUid, btnLogout, btnChangePassword;
+    private Button btnChangeUid, btnChangePassword,btnOtherUser;
     private ImageView imgProfilePic;
     private TextView txtName, txtEmail;
     private String imgDir = "https://firebasestorage.googleapis.com/v0/b/cs408-project.appspot.com/o/";
@@ -32,13 +35,14 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        btnChangeUid = (Button) findViewById(R.id.profile_changeUID);
+       // btnChangeUid = (Button) findViewById(R.id.profile_changeUID);
 
-        btnChangePassword = (Button) findViewById(R.id.profile_changePassword);
-        btnLogout = (Button) findViewById(R.id.profile_logout);
+       // btnChangePassword = (Button) findViewById(R.id.profile_changePassword);
+
         imgProfilePic = (ImageView) findViewById(R.id.profile_image);
         txtName = (TextView) findViewById(R.id.profile_userName);
         txtEmail = (TextView) findViewById(R.id.profile_email);
+       // btnOtherUser=(Button) findViewById(R.id.profile_otheruser);
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         db.collection("Users").document(mAuth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -59,44 +63,70 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             }
         });
+
         imgProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ImageUpload.class);
-                startActivity(intent);
+                imageUpload();
 
             }
         });
-        btnChangeUid.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ChangeUserNameActivity.class);
-                startActivity(intent);
-
-            }
-        });
-        btnChangePassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ChangePasswordActivity.class);
-                startActivity(intent);
 
 
-            }
-        });
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.signOut();
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                        | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-            }
-        });
     }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.profile,menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.settings_logout:
+                logout();
+                return true;
+            case R.id.settings_username:
+                changeUid();
+                return true;
+            case R.id.settings_password:
+                changePassword();
+                return true;
+            case R.id.settings_usertest:
+                otherUser();
+                return true;
+
+
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    private void logout(){
+        mAuth.signOut();
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    private void imageUpload(){
+        Intent intent = new Intent(getApplicationContext(), ImageUpload.class);
+        startActivity(intent);
+    }
+    private void changeUid(){
+        Intent intent = new Intent(getApplicationContext(), ChangeUserNameActivity.class);
+        startActivity(intent);
+    }
+    private void changePassword(){
+        Intent intent = new Intent(getApplicationContext(), ChangePasswordActivity.class);
+        startActivity(intent);
+    }
+    private void otherUser(){
+        Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
+        intent.putExtra("UID","pA2ScUYVbsMTq1vP6cys3Fe2Uoh1");
+        startActivity(intent);
+    }
     @Override
     public void onBackPressed() {
         onSupportNavigateUp();

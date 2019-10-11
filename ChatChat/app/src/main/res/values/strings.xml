@@ -6,6 +6,7 @@
     <string name="username">username</string>
     <string name="date">date</string>
     <string name="this_is_a_message">this is a message</string>
+    <string name="name">Name</string>
 
     <string-array name="categories">
         <item>Choose a topic for your chatroom</item>

@@ -1,6 +1,10 @@
 package com.example.chatchat.Activities;
 
-import com.example.chatchat.MainActivity;
+import android.content.Intent;
+
+import com.example.chatchat.LoginActivity;
+import com.example.chatchat.MainPageActivity;
+import com.example.chatchat.ProfileActivity;
 import com.example.chatchat.R;
 
 import org.junit.Rule;
@@ -17,25 +21,70 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+
 @LargeTest
 public class LoginUnitTest {
 
     @Rule
-    public ActivityTestRule<MainActivity> activityRule
-            = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<LoginActivity> activityRule
+            = new ActivityTestRule<>(LoginActivity.class);
 
     @Test
-    public void mainPageButtonIsDisplayed() {
-        onView(withId(R.id.login_bt)).check(matches(withText("LOG IN WITH EMAIL")));
-        onView(withId(R.id.login_bt)).perform(click());
-    }
-
-    @Test
-    public void Login() {
-        onView(withId(R.id.login_bt)).perform(click());
+    public void login_with_correct_info() {
+        Intent intent = new Intent();
+        activityRule.launchActivity(intent);
         onView(withId(R.id.email)).perform(new TypeTextAction("user1@email.com"));
+        onView(withId(R.id.password)).perform(closeSoftKeyboard());
         onView(withId(R.id.password)).perform(new TypeTextAction("12345678"));
         onView(withId(R.id.password)).perform(closeSoftKeyboard());
         onView(withId(R.id.login_bt)).perform(click());
+        activityRule.finishActivity();
     }
+
+    @Test
+    public void login_with_wrong_pw() {
+        Intent intent = new Intent();
+        activityRule.launchActivity(intent);
+        onView(withId(R.id.email)).perform(new TypeTextAction("user1@email.com"));
+        onView(withId(R.id.password)).perform(closeSoftKeyboard());
+        onView(withId(R.id.password)).perform(new TypeTextAction("0000000000"));
+        onView(withId(R.id.password)).perform(closeSoftKeyboard());
+        onView(withId(R.id.login_bt)).perform(click());
+        activityRule.finishActivity();
+    }
+
+    @Test
+    public void login_with_wrong_account() {
+        Intent intent = new Intent();
+        activityRule.launchActivity(intent);
+        onView(withId(R.id.email)).perform(new TypeTextAction("userWrong@email.com"));
+        onView(withId(R.id.password)).perform(closeSoftKeyboard());
+        onView(withId(R.id.password)).perform(new TypeTextAction("12345678"));
+        onView(withId(R.id.password)).perform(closeSoftKeyboard());
+        onView(withId(R.id.login_bt)).perform(click());
+        activityRule.finishActivity();
+
+    }
+
+    @Test
+    public void login_without_pw() {
+        Intent intent = new Intent();
+        activityRule.launchActivity(intent);
+        onView(withId(R.id.email)).perform(new TypeTextAction("user1@email.com"));
+        onView(withId(R.id.password)).perform(closeSoftKeyboard());
+        onView(withId(R.id.login_bt)).perform(click());
+        activityRule.finishActivity();
+
+    }
+
+    @Test
+    public void login_without_account() {
+        Intent intent = new Intent();
+        activityRule.launchActivity(intent);
+        onView(withId(R.id.password)).perform(new TypeTextAction("12345678"));
+        onView(withId(R.id.password)).perform(closeSoftKeyboard());
+        onView(withId(R.id.login_bt)).perform(click());
+        activityRule.finishActivity();
+    }
+
 }

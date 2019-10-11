@@ -2,6 +2,11 @@
     <string name="app_name">ChatChat</string>
     <string name="login">Log in with email</string>
     <string name="SignUp">Sign Up</string>
+    <string name="logout">Logout</string>
+    <string name="username">username</string>
+    <string name="date">date</string>
+    <string name="this_is_a_message">this is a message</string>
+
     <string-array name="categories">
         <item>Choose a topic for your chatroom</item>
         <item>Sports</item>
@@ -13,6 +18,4 @@
         <item>Tech</item>
         <item>Travel</item>item>
     </string-array>
-
-    <string name="logout">Logout</string>
 </resources>

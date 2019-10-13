@@ -44,8 +44,8 @@ public class ChatRoomListAdapter extends RecyclerView.Adapter<ChatRoomListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ChatroomHolder holder, int position) {
-        final Chatroom chatroom = chatrooms.get(position);
-        final String chatname = chatroom.getName();
+        Chatroom chatroom = chatrooms.get(position);
+        String chatname = chatroom.getName();
         holder.roomname.setText(chatname);
         holder.roomname.setClickable(true);
         holder.roomname.setOnClickListener(new RoomClickListener(chatroom, context));
@@ -90,7 +90,8 @@ public class ChatRoomListAdapter extends RecyclerView.Adapter<ChatRoomListAdapte
         public void onClick(View v) {
             Toast.makeText(context, "joining the room",Toast.LENGTH_LONG).show();
             Intent intent = new Intent(context, ChatActivity.class);
-            intent.putExtra("Chatroom", chat);
+            intent.putExtra("Chatroom_ID", chat.getChatId());
+            intent.putExtra("Chatroom_NAME", chat.getName());
             context.startActivity(intent);
         }
     }

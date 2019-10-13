@@ -26,30 +26,31 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
 
     private Context context;
     private ArrayList<Message> messageArrayList;
-    private FirebaseUser firebaseUser;
+    private String user_uid;
 
-    public ChatAdapter(ArrayList<Message> messageArrayList, Context context)
+    public ChatAdapter(ArrayList<Message> messageArrayList, String uid, Context context)
     {
         this.context = context;
         this.messageArrayList = messageArrayList;
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        user_uid = uid;
 
     }
 
 
     @Override
     public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v;
         if(viewType == MESSAGE_LEFT)
         {
-            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_dialog_left, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_dialog_left, parent, false);
+            return new MessageViewHolder(v);
         }
         else if(viewType == MESSAGE_RIGHT)
         {
-            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_dialog_right, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_dialog_right, parent, false);
+            return new MessageViewHolder(v);
         }
-        MessageViewHolder messageViewHolder = new MessageViewHolder(v);
-        return messageViewHolder;
+
+        return null;
     }
 
 
@@ -57,6 +58,16 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
 
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
+        Message message = messageArrayList.get(position);
+        holder.message.setText(message.getContent());
+        holder.date.setText(message.getDate());
+
+        //TODO
+        /*
+        * Add clickListener for ImageView and display profile picture
+        * for holder.profile_picture
+        * */
+
 
     }
 
@@ -71,8 +82,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
     public int getItemViewType(int position)
     {
         String message_sender = messageArrayList.get(position).getUserId();
-        String currentUser_uid = firebaseUser.getUid();
-        if(currentUser_uid.equals(message_sender))
+
+        if(user_uid.equals(message_sender))
         {
             return MESSAGE_RIGHT;
         }
@@ -86,6 +97,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
     public class MessageViewHolder extends RecyclerView.ViewHolder {
 
         public TextView message;
+        public TextView date;
         public ImageView profile_picture;
 
 
@@ -93,6 +105,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
             super(itemView);
 
             message = itemView.findViewById(R.id.message_message);
+            date = itemView.findViewById(R.id.message_date);
             profile_picture = itemView.findViewById(R.id.message_photo);
         }
     }

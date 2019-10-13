@@ -34,13 +34,10 @@ import model.Chatroom;
 public class SearchActivity extends AppCompatActivity {
 
     private EditText mSearch;
-    private FirebaseAuth mAuth;
-    private CollectionReference mRef;
     private FirebaseFirestore db;
     private RecyclerView recyclerView;
     private ChatRoomListAdapter adapter;
     private ArrayList<Chatroom> chatrooms;
-    private String category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,60 +50,48 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(llm);
 
         db = FirebaseFirestore.getInstance();
-        mRef= db.collection("Chatroom").document(mAuth.getUid()).collection("Name");
-        category = getIntent().getStringExtra("category");
         chatrooms = new ArrayList<>();
         adapter = new ChatRoomListAdapter(chatrooms, SearchActivity.this);
         recyclerView.setAdapter(adapter);
 
-        Query query = mRef.orderBy("name", Query.Direction.ASCENDING).startAt(mSearch.getText().toString()).endAt(mSearch.getText().toString() + "uf8ff");
-        firebaseSearch(query);
-    }
-    private void firebaseSearch(Query sortQuery){
-
-        FirestoreRecyclerOptions<SearchItem> options = new FirestoreRecyclerOptions.Builder<SearchItem>().setQuery(sortQuery,SearchItem.class).build();
-        adapter = new SearchAdapter(options);
-        recyclerView = findViewById(R.id.Search_recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter.startListening();
-        recyclerView.setAdapter(adapter);
-
-        adapter.setLongClickListener(new .OnItemLongClickListener() {
+        Query chatroomQuery = db.collection("Chatroom").whereEqualTo("chatName", mSearch.getText().toString());
+        Log.d("ChatroomList", "getting query from db");
+        chatroomQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onItemClick(final DocumentSnapshot documentSnapshot, final int position) {
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful())
+                {
+                    Log.d("ChatroomList", "getting rooms from db");
 
-                new AlertDialog.Builder( SearchActivity.this )
-                        .setTitle( "txt" )
-                        .setMessage( "Downloading Expense?" )
-                        .setPositiveButton( "Download", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                File dir = new File(Environment.getDataDirectory(),documentSnapshot.get("name").toString()+"txt");
+                    for(QueryDocumentSnapshot chatroomDoc : task.getResult())
+                    {
+                        Log.d("ChatroomList", "getting single room attributes from db");
+                        String category = (String)chatroomDoc.getData().get(Chatroom.CATEGORY);
+                        String chatName = (String)chatroomDoc.getData().get(Chatroom.CHAT_NAME);
+                        String description = (String)chatroomDoc.getData().get(Chatroom.DESCRIPTION);
+                        String likes = (String)chatroomDoc.getData().get(Chatroom.LIKES);
+                        String creater_name = (String)chatroomDoc.getData().get(Chatroom.CREATER);
+                        String date = (String)chatroomDoc.getData().get(Chatroom.DATE);
+                        String chat_id = (String)chatroomDoc.getData().get(Chatroom.CHAT_ID);
 
-                                try{
-                                    BufferedWriter fileWriter = new BufferedWriter(new FileWriter(Environment.getDataDirectory().toString()+documentSnapshot.get("name").toString()+"txt",true));
-                                    fileWriter.append("asdsada");
-
-                                    fileWriter.close();
-                                    Toast.makeText(SearchExpense.this,Environment.getDataDirectory().toString(),Toast.LENGTH_SHORT).show();
-                                }catch (Exception e){
-                                    Toast.makeText(SearchExpense.this,"Failed",Toast.LENGTH_SHORT).show();
-                                }
-
-
-
-                            }
-                        })
-                        .setNegativeButton( "Cancel", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        } )
-                        .show();
+                        Chatroom tempChat = new Chatroom(chatName, category, creater_name, date);
+                        tempChat.setChatId(chat_id);
+                        tempChat.setLikes(likes);
+                        tempChat.setDate(description);
+                        chatrooms.add(tempChat);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+                else
+                {
+                    Log.d("ChatroomList", "No room found");
+                }
+                adapter.notifyDataSetChanged();
             }
         });
 
+        adapter.notifyDataSetChanged();
+        Log.d("ChatroomList", "number of rooms getting from db is " + chatrooms.size());
     }
-
 }
 

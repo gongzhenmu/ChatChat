@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.chatchat.ChatActivity;
 import com.example.chatchat.ChatroomListActivity;
 import com.example.chatchat.R;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -21,10 +22,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import model.Chatroom;
 
 public class ChatRoomListAdapter extends RecyclerView.Adapter<ChatRoomListAdapter.ChatroomHolder>{
+
+
     private ArrayList<Chatroom> chatrooms;
     private Context context;
-
-
     public ChatRoomListAdapter(ArrayList<Chatroom> chat, Context context)
     {
         chatrooms = chat;

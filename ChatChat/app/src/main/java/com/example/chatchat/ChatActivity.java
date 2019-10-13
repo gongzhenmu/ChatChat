@@ -15,10 +15,12 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -31,6 +33,7 @@ import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
@@ -39,6 +42,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 public class ChatActivity extends AppCompatActivity {
@@ -56,7 +60,13 @@ public class ChatActivity extends AppCompatActivity {
     private FirebaseFirestore db;
 
     private ArrayList<Message> messageArrayList;
+    private List<String> fList = new ArrayList<>();
+    private ToggleButton button_like;
+    private int numberOfLikes;
+    private int numberOfFavoriteRooms;
     private ChatAdapter adapter;
+    //used for elimination false action when the default value of the button is false
+    private int defaultNum = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +102,7 @@ public class ChatActivity extends AppCompatActivity {
 
         //get  username for current user
         username = "null_username";
-        DocumentReference userRf = db.collection("Users").document(user_uid);
+        final DocumentReference userRf = db.collection("Users").document(user_uid);
         userRf.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -120,6 +130,73 @@ public class ChatActivity extends AppCompatActivity {
                 sendMessage(message);
                 Toast.makeText(ChatActivity.this, "sending successful", Toast.LENGTH_LONG).show();
                 editText.setText(" ");
+            }
+        });
+
+        //get number of likes in the chatroom
+        final DocumentReference chatroomRef =  db.collection("Chatroom").document(chatroom_id);
+        chatroomRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        numberOfLikes = document.getLong("likes").intValue();
+                    } else {
+                        Toast.makeText(ChatActivity.this, "Error chatroom document not exists", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(ChatActivity.this, "Error read chatroom document", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        //add to favorite list
+        button_like = (ToggleButton)findViewById(R.id.activity_chat_button_like);
+        userRf.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        if(document.contains("favoriteList")) {
+                            fList = (List<String>) document.get("favoriteList");
+                            numberOfFavoriteRooms = fList.size();
+                            if (fList.contains(chatroom_id)) {
+                                button_like.setChecked(true);
+                            }
+                        }
+                    } else {
+                        Toast.makeText(ChatActivity.this, "Error document not exists", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(ChatActivity.this, "Error read document", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        //when the button changes state
+        button_like.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked && !fList.contains(chatroom_id)) {
+                    // The toggle is enabled
+                    if(numberOfFavoriteRooms < 10) {
+                        numberOfLikes++;
+                        fList.add(chatroom_id);
+                        userRf.update("favoriteList", fList);
+                        chatroomRef.update("likes", numberOfLikes);
+                    }
+                    else
+                        Toast.makeText(ChatActivity.this, "Exceed 10 favorite room limit, please delete one first", Toast.LENGTH_LONG).show();
+
+                } else {
+                    // The toggle is disabled
+                    if(defaultNum++ != 0 && fList.contains(chatroom_id)){
+                        fList.remove(chatroom_id);
+                        numberOfLikes --;
+                        userRf.update("favoriteList", fList);
+                        chatroomRef.update("likes", numberOfLikes);
+                    }
+                }
             }
         });
 

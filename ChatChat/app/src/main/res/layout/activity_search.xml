@@ -7,7 +7,7 @@
         android:id="@+id/search_room"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:text="Search"
+        android:hint="Enter room name here:"
         android:gravity="center_vertical"
         android:textSize="25sp"
         android:background="@color/colorPrimary"
@@ -19,4 +19,13 @@
         android:layout_height="wrap_content"
         android:clipToPadding="false"
         />
+
+    <Button
+        android:id="@+id/search_button"
+        android:layout_width="236dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/colorAccent"
+        android:text="SEARCH"
+        android:textColor="@android:color/white" />
 </LinearLayout>

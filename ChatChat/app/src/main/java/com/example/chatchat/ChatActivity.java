@@ -75,7 +75,6 @@ public class ChatActivity extends AppCompatActivity {
         adapter = new ChatAdapter(messageArrayList, user_uid, ChatActivity.this);
         rv.setAdapter(adapter);
 
-
         chatroom_id =  getIntent().getStringExtra("Chatroom_ID");
         chatroom_name = getIntent().getStringExtra("Chatroom_NAME");
         titleText = (TextView)findViewById(R.id.activity_chat_title);
@@ -142,7 +141,6 @@ public class ChatActivity extends AppCompatActivity {
                 Toast.makeText(ChatActivity.this, "fail to send message" , Toast.LENGTH_LONG).show();
             }
         });
-
     }
 
     public void retriveMessage()
@@ -178,7 +176,7 @@ public class ChatActivity extends AppCompatActivity {
         CollectionReference messageRef = db.collection("Chatroom").document(chatroom_id).
                 collection("Messages");
         messageRef.orderBy("timestamp", Query.Direction.ASCENDING);
-        messageRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+        messageRef.addSnapshotListener(ChatActivity.this, new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 for(DocumentChange dc : queryDocumentSnapshots.getDocumentChanges())
@@ -208,7 +206,5 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
 }

@@ -55,16 +55,7 @@ public class UserProfileActivity extends AppCompatActivity {
         txtEmail = (TextView)findViewById(R.id.userProfile_email);
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-        uid =getIntent().getExtras().getString("UID");
-        showFavorite();
-
-
-
-
-
-    }
-
-    private void showFavorite(){
+        uid = getIntent().getExtras().getString("UID");
 
         db.collection("Users").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

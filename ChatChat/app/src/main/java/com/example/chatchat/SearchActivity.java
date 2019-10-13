@@ -45,7 +45,6 @@ public class SearchActivity extends AppCompatActivity {
         adapter = new ChatRoomListAdapter(chatrooms, SearchActivity.this);
         recyclerView.setAdapter(adapter);
         button = findViewById(R.id.search_button);
-        //Query chatroomQuery = db.collection("Chatroom").whereEqualTo("chatName", mSearch.getText().toString());
         Log.d("ChatroomList", "getting query from db");
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +84,6 @@ public class SearchActivity extends AppCompatActivity {
                 });
             }
         });
-
         adapter.notifyDataSetChanged();
         Log.d("ChatroomList", "number of rooms getting from db is " + chatrooms.size());
     }

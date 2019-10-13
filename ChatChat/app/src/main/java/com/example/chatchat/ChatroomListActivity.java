@@ -58,7 +58,7 @@ public class ChatroomListActivity extends AppCompatActivity {
                         String category = (String)chatroomDoc.getData().get(Chatroom.CATEGORY);
                         String chatName = (String)chatroomDoc.getData().get(Chatroom.CHAT_NAME);
                         String description = (String)chatroomDoc.getData().get(Chatroom.DESCRIPTION);
-                        String likes = chatroomDoc.getData().get(Chatroom.LIKES).toString();
+                        String likes = (String)chatroomDoc.getData().get(Chatroom.LIKES);
                         String creater_name = (String)chatroomDoc.getData().get(Chatroom.CREATER);
                         String date = (String)chatroomDoc.getData().get(Chatroom.DATE);
                         String chat_id = (String)chatroomDoc.getData().get(Chatroom.CHAT_ID);

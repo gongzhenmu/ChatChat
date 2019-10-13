@@ -141,7 +141,7 @@ public class ChatActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        numberOfLikes = document.getLong("likes").intValue();
+                        numberOfLikes = Integer.parseInt(document.getString("likes"));
                     } else {
                         Toast.makeText(ChatActivity.this, "Error chatroom document not exists", Toast.LENGTH_LONG).show();
                     }
@@ -174,6 +174,7 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
         });
+
         //when the button changes state
         button_like.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -183,18 +184,17 @@ public class ChatActivity extends AppCompatActivity {
                         numberOfLikes++;
                         fList.add(chatroom_id);
                         userRf.update("favoriteList", fList);
-                        chatroomRef.update("likes", numberOfLikes);
+                        chatroomRef.update("likes", Integer.toString(numberOfLikes));
                     }
                     else
                         Toast.makeText(ChatActivity.this, "Exceed 10 favorite room limit, please delete one first", Toast.LENGTH_LONG).show();
-
                 } else {
                     // The toggle is disabled
                     if(defaultNum++ != 0 && fList.contains(chatroom_id)){
                         fList.remove(chatroom_id);
                         numberOfLikes --;
                         userRf.update("favoriteList", fList);
-                        chatroomRef.update("likes", numberOfLikes);
+                        chatroomRef.update("likes", Integer.toString(numberOfLikes));
                     }
                 }
             }

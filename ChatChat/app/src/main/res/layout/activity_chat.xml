@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_chat_parent"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -32,7 +33,6 @@
         android:layout_alignTop = "@+id/activity_chat_title"
         android:layout_marginTop="50dp"
         android:layout_above="@+id/activity_chat_bottom_layout"
-
         />
 
     <RelativeLayout
@@ -41,7 +41,8 @@
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:background="#fff"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        >
 
         <EditText
             android:id="@+id/activity_chat_message_editText"
@@ -50,7 +51,8 @@
             android:layout_toLeftOf="@+id/activity_chat_button_send"
             android:layout_centerVertical="true"
             android:background="@android:color/transparent"
-            android:hint="Type a message..." />
+            android:hint="Type a message..."
+            />
         <ImageButton
             android:id="@+id/activity_chat_button_send"
             android:layout_width="40dp"

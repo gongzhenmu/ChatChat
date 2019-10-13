@@ -61,6 +61,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
         Message message = messageArrayList.get(position);
         holder.message.setText(message.getContent());
         holder.date.setText(message.getDate());
+        holder.username.setText(message.getUsername());
 
         //TODO
         /*
@@ -69,6 +70,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
         * */
 
 
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView)
+    {
+        super.onAttachedToRecyclerView(recyclerView);
     }
 
 
@@ -98,6 +105,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
 
         public TextView message;
         public TextView date;
+        public TextView username;
         public ImageView profile_picture;
 
 
@@ -107,6 +115,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
             message = itemView.findViewById(R.id.message_message);
             date = itemView.findViewById(R.id.message_date);
             profile_picture = itemView.findViewById(R.id.message_photo);
+            username = itemView.findViewById(R.id.message_username);
         }
     }
 }

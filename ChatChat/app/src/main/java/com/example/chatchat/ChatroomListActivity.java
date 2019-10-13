@@ -40,8 +40,6 @@ public class ChatroomListActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         category = getIntent().getStringExtra("category");
         chatrooms = new ArrayList<>();
-        Chatroom test = new Chatroom("testing from ChatRoomListActivity", "Sports", "Shikang", "19/09/19");
-        chatrooms.add(test);
         adapter = new ChatRoomListAdapter(chatrooms, ChatroomListActivity.this);
         rv.setAdapter(adapter);
 
@@ -63,8 +61,10 @@ public class ChatroomListActivity extends AppCompatActivity {
                         String likes = (String)chatroomDoc.getData().get(Chatroom.LIKES);
                         String creater_name = (String)chatroomDoc.getData().get(Chatroom.CREATER);
                         String date = (String)chatroomDoc.getData().get(Chatroom.DATE);
+                        String chat_id = (String)chatroomDoc.getData().get(Chatroom.CHAT_ID);
 
                         Chatroom tempChat = new Chatroom(chatName, category, creater_name, date);
+                        tempChat.setChatId(chat_id);
                         tempChat.setLikes(likes);
                         tempChat.setDate(description);
                         chatrooms.add(tempChat);

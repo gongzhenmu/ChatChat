@@ -10,17 +10,17 @@ public class Message {
     public static final String URL = "url";
     public static final String USER_ID = "user_id";
     public static final String DATE = "date";
-    private String content;
-    private String username;
-    private String url;
-    private String user_id;
-    private String date;
+    public static final String TIMESTAMP = "timestamp";
 
 
+    public Message()
+    {
+
+    }
     public Message(String mes, String username, String url, String user_id,String date)
     {
         message.put(CONTENT, mes);
-        message.put(USERNAME, user_id);
+        message.put(USERNAME, username);
         message.put(URL, url);
         message.put(USER_ID, user_id);
         message.put(DATE, date);
@@ -53,4 +53,8 @@ public class Message {
     {
         return message.get(DATE);
     }
+
+    public void setTimestamp(String timestamp){message.put(TIMESTAMP, timestamp);}
+
+    public String getTimestamp(){return message.get(TIMESTAMP);}
 }

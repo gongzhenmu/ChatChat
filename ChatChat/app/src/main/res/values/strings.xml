@@ -3,6 +3,9 @@
     <string name="login">Log in with email</string>
     <string name="SignUp">Sign Up</string>
     <string name="logout">Logout</string>
+    <string name="username">username</string>
+    <string name="date">date</string>
+    <string name="this_is_a_message">this is a message</string>
     <string name="name">Name</string>
 
     <string-array name="categories">

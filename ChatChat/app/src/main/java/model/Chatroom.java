@@ -1,10 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Chatroom {
+public class Chatroom implements Serializable {
     private Map<String, String> chatroom = new HashMap<>();
     public static final String CHAT_NAME = "chatName";
     public static final String CATEGORY = "category";
@@ -12,7 +13,7 @@ public class Chatroom {
     public static final String LIKES = "likes";
     public static final String CREATER = "creater_name";
     public static final String DATE = "date";
-    public static final String CHAT_ID = "chat_ic";
+    public static final String CHAT_ID = "chat_id";
 
     private String category;
     private String chatName;
@@ -20,6 +21,7 @@ public class Chatroom {
     private String likes;
     private String creater_name;
     private String date;
+    //private ArrayList<Message> messages;
 
     public Chatroom()
     {
@@ -34,7 +36,7 @@ public class Chatroom {
         chatroom.put(LIKES, "0");
         chatroom.put(CREATER, creater_name);
         chatroom.put(DATE, date);
-
+        //messages = new ArrayList<>();
     }
 
     public void setChatId(String id)

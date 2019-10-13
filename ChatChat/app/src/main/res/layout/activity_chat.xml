@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_chat_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e6e6e6"
+    tools:context=".ChatActivity">
+
+    <TextView
+        android:id="@+id/activity_chat_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="RoomList"
+        android:gravity="center_vertical"
+        android:textSize="25sp"
+        android:background="@color/colorPrimary"
+        />
+    <ImageButton
+        android:id="@+id/activity_chat_button_info"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_info_button"
+        android:layout_alignParentRight="true"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/activity_chat_message_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:layout_alignTop = "@+id/activity_chat_title"
+        android:layout_marginTop="50dp"
+        android:layout_above="@+id/activity_chat_bottom_layout"
+        />
+
+    <RelativeLayout
+        android:id="@+id/activity_chat_bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:background="#fff"
+        android:layout_alignParentBottom="true"
+        >
+
+        <EditText
+            android:id="@+id/activity_chat_message_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/activity_chat_button_send"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:hint="Type a message..."
+            />
+        <ImageButton
+            android:id="@+id/activity_chat_button_send"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/ic_send_button"
+            />
+    </RelativeLayout>
+
+
+
+
+
+</RelativeLayout>

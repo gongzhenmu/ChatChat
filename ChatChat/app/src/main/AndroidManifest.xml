@@ -11,6 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="ExtraText">
+
+        <activity android:name=".ChatActivity"></activity>
         <activity android:name=".UserProfileActivity"></activity>
         <activity
             android:name=".ProfileActivity"

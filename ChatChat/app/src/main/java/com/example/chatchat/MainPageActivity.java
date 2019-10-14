@@ -61,6 +61,10 @@ public class MainPageActivity extends AppCompatActivity {
                 Intent intent1 = new Intent(getApplicationContext(),SearchActivity.class);
                 startActivity(intent1);
                 return true;
+            case R.id.toolbar_feedback:
+                Intent intent2 = new Intent(getApplicationContext(),FeedbackActivity.class);
+                startActivity(intent2);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

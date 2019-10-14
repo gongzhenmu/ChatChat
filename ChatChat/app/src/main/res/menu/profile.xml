@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+
+    <item android:id = "@+id/settings_logout"
+        android:icon="@drawable/ic_exit_white"
+        android:title = "logout"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id = "@+id/settings_password"
+        android:title="Password"
+        app:showAsAction="never"
+        />
+    <item android:id = "@+id/settings_username"
+        android:title="Username"
+        app:showAsAction="never"/>
+    <item android:id = "@+id/settings_usertest"
+        android:title="otheruserTest"
+        app:showAsAction="never"/>
+
+
+</menu>

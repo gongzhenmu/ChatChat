@@ -45,4 +45,6 @@ public class User {
     public void setUserEmail(String userEmail) {
         user.put(USER_ID, userEmail);
     }
+
+    public String getImage(){ return user.get(IMAGE); }
 }

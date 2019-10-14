@@ -1,6 +1,7 @@
 package Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.chatchat.ChatActivity;
+import com.example.chatchat.ChatroomListActivity;
 import com.example.chatchat.R;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -18,10 +22,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import model.Chatroom;
 
 public class ChatRoomListAdapter extends RecyclerView.Adapter<ChatRoomListAdapter.ChatroomHolder>{
+
+
     private ArrayList<Chatroom> chatrooms;
     private Context context;
-
-
     public ChatRoomListAdapter(ArrayList<Chatroom> chat, Context context)
     {
         chatrooms = chat;
@@ -40,15 +44,11 @@ public class ChatRoomListAdapter extends RecyclerView.Adapter<ChatRoomListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ChatroomHolder holder, int position) {
-        String chatname = chatrooms.get(position).getName();
+        Chatroom chatroom = chatrooms.get(position);
+        String chatname = chatroom.getName();
         holder.roomname.setText(chatname);
         holder.roomname.setClickable(true);
-        holder.roomname.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "joining the room",Toast.LENGTH_LONG).show();
-            }
-        });
+        holder.roomname.setOnClickListener(new RoomClickListener(chatroom, context));
     }
 
     @Override
@@ -56,8 +56,6 @@ public class ChatRoomListAdapter extends RecyclerView.Adapter<ChatRoomListAdapte
     {
         super.onAttachedToRecyclerView(recyclerView);
     }
-
-
 
 
     @Override
@@ -75,6 +73,26 @@ public class ChatRoomListAdapter extends RecyclerView.Adapter<ChatRoomListAdapte
             mView = itemView;
             cv = (CardView) mView.findViewById(R.id.cardview_chatroom);
             roomname = (TextView)mView.findViewById(R.id.cardview_chatname);
+        }
+    }
+
+    private class RoomClickListener implements View.OnClickListener {
+
+        Chatroom chat;
+        Context context;
+
+        public RoomClickListener(Chatroom chat, Context context)
+        {
+            this.chat = chat;
+            this.context = context;
+        }
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(context, "joining the room",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(context, ChatActivity.class);
+            intent.putExtra("Chatroom_ID", chat.getChatId());
+            intent.putExtra("Chatroom_NAME", chat.getName());
+            context.startActivity(intent);
         }
     }
 }

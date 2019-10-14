@@ -1,16 +1,13 @@
 package com.example.chatchat;
 
-import Adapter.ChatRoomListAdapter;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import model.Chatroom;
-
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.LinearLayout;
+import android.widget.EditText;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -21,29 +18,33 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class ChatroomListActivity extends AppCompatActivity {
+import Adapter.ChatRoomListAdapter;
+import model.Chatroom;
 
+public class SearchActivity extends AppCompatActivity {
+
+    private EditText mSearch;
     private FirebaseFirestore db;
-    private RecyclerView rv;
+    private RecyclerView recyclerView;
     private ChatRoomListAdapter adapter;
     private ArrayList<Chatroom> chatrooms;
-    private String category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatroom_list);
-        rv = (RecyclerView)findViewById(R.id.activity_chatroom_list_recyclerview);
-        LinearLayoutManager llm = new LinearLayoutManager(ChatroomListActivity.this);
-        rv.setLayoutManager(llm);
+
+        mSearch = findViewById(R.id.search_room);
+        recyclerView = findViewById(R.id.activity_search_recyclerview);
+        LinearLayoutManager llm = new LinearLayoutManager(SearchActivity.this);
+        recyclerView.setLayoutManager(llm);
 
         db = FirebaseFirestore.getInstance();
-        category = getIntent().getStringExtra("category");
         chatrooms = new ArrayList<>();
-        adapter = new ChatRoomListAdapter(chatrooms, ChatroomListActivity.this);
-        rv.setAdapter(adapter);
+        adapter = new ChatRoomListAdapter(chatrooms, SearchActivity.this);
+        recyclerView.setAdapter(adapter);
 
-        Query chatroomQuery = db.collection("Chatroom").whereEqualTo("category", category);
+        Query chatroomQuery = db.collection("Chatroom").whereEqualTo("chatName", mSearch.getText().toString());
         Log.d("ChatroomList", "getting query from db");
         chatroomQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -83,3 +84,4 @@ public class ChatroomListActivity extends AppCompatActivity {
         Log.d("ChatroomList", "number of rooms getting from db is " + chatrooms.size());
     }
 }
+

@@ -18,13 +18,27 @@
         android:textSize="25sp"
         android:background="@color/colorPrimary"
         />
+    <ToggleButton
+        android:id="@+id/activity_chat_button_like"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/button_like"
+        android:checked="false"
+        android:layout_alignParentRight="true"
+        android:text=""
+        android:textOff=""
+        android:textOn=""
+        />
+
+
     <ImageButton
         android:id="@+id/activity_chat_button_info"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:background="@drawable/ic_info_button"
         android:layout_alignParentRight="true"
-        />
+        android:layout_marginRight="37dp"
+        android:background="@drawable/ic_info_button" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/activity_chat_message_recyclerView"
         android:layout_width="match_parent"

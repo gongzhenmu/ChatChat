@@ -15,10 +15,13 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -31,6 +34,7 @@ import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
@@ -39,6 +43,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 public class ChatActivity extends AppCompatActivity {
@@ -56,6 +61,9 @@ public class ChatActivity extends AppCompatActivity {
     private FirebaseFirestore db;
 
     private ArrayList<Message> messageArrayList;
+    private List<String> fList = new ArrayList<>();
+    private ToggleButton toggle_button_like;
+    private int numberOfLikes;
     private ChatAdapter adapter;
 
     @Override
@@ -91,7 +99,7 @@ public class ChatActivity extends AppCompatActivity {
 
         //get  username for current user
         username = "null_username";
-        DocumentReference userRf = db.collection("Users").document(user_uid);
+        final DocumentReference userRf = db.collection("Users").document(user_uid);
         userRf.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -119,6 +127,75 @@ public class ChatActivity extends AppCompatActivity {
                 sendMessage(message);
                 Toast.makeText(ChatActivity.this, "sending successful", Toast.LENGTH_LONG).show();
                 editText.setText(" ");
+            }
+        });
+
+        //get number of likes in the chatroom
+        final DocumentReference chatroomRef =  db.collection("Chatroom").document(chatroom_id);
+        chatroomRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        numberOfLikes = Integer.parseInt(document.getString("likes"));
+                    } else {
+                        Toast.makeText(ChatActivity.this, "Error chatroom document not exists", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(ChatActivity.this, "Error read chatroom document", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        //add to favorite list
+        toggle_button_like = (ToggleButton)findViewById(R.id.activity_chat_button_like);
+        userRf.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        if(document.contains("favoriteList")) {
+                            fList = (List<String>) document.get("favoriteList");
+                            if (fList.contains(chatroom_id)) {
+                                toggle_button_like.setChecked(true);
+                            }
+                        }
+                    } else {
+                        Toast.makeText(ChatActivity.this, "Error document not exists", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(ChatActivity.this, "Error read document", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        //when the button changes state
+
+        toggle_button_like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean isChecked = toggle_button_like.isChecked();
+                if (isChecked && !fList.contains(chatroom_id)) {
+                    // The toggle is enabled
+                    if(fList.size() < 10) {
+                        numberOfLikes++;
+                        fList.add(chatroom_id);
+                        userRf.update("favoriteList", fList);
+                        chatroomRef.update("likes", Integer.toString(numberOfLikes));
+                    }
+                    else
+                        Toast.makeText(ChatActivity.this, "Exceed 10 favorite room limit, please delete one first", Toast.LENGTH_LONG).show();
+                } else {
+                    // The toggle is disabled
+                    if(fList.contains(chatroom_id)){
+                        fList.remove(chatroom_id);
+                        numberOfLikes --;
+                        userRf.update("favoriteList", fList);
+                        chatroomRef.update("likes", Integer.toString(numberOfLikes));
+                    }
+                }
             }
         });
 

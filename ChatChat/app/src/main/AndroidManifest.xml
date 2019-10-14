@@ -16,7 +16,7 @@
         <activity android:name=".UserProfileActivity"></activity>
         <activity
             android:name=".ProfileActivity"
-            android:parentActivityName=".MainPageActivity" />
+            android:parentActivityName=".ExploreActivity" />
         <activity
             android:name=".ImageUpload"
             android:parentActivityName=".ProfileActivity" />

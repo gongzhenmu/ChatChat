@@ -2,6 +2,10 @@ package com.example.chatchat;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import Adapter.ChatRoomListAdapter;
 import model.Chatroom;
 import model.User;
 
@@ -9,10 +13,14 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,7 +35,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.w3c.dom.Document;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class ExploreActivity extends AppCompatActivity {
 
@@ -47,6 +57,13 @@ public class ExploreActivity extends AppCompatActivity {
     private Button createButton;
     private String date = Calendar.getInstance().getTime().toString();
     private String inputRegex = "^[a-zA-Z0-9][\\w\\s]*[.,!?]*";
+    //favorite list
+    private RecyclerView rv;
+    private ChatRoomListAdapter adapter;
+    private ArrayList<Chatroom> chatrooms;
+    private List<String> favorite;
+    private TextView faList;
+
 
 
     private Button sportsButton;
@@ -64,11 +81,19 @@ public class ExploreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore);
 
+        rv = (RecyclerView)findViewById(R.id.explore_recyclerview);
+        LinearLayoutManager llm = new LinearLayoutManager(ExploreActivity.this);
+        rv.setLayoutManager(llm);
+        chatrooms = new ArrayList<>();
+        adapter = new ChatRoomListAdapter(chatrooms, ExploreActivity.this);
+        rv.setAdapter(adapter);
+
         createChatDialog = new Dialog(this);
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
 
+        faList = (TextView)findViewById(R.id.explore_favoriteList);
         sportsButton = (Button)findViewById(R.id.explore_sports);
         newsButton = (Button)findViewById(R.id.explore_news);
         gamesButton = (Button)findViewById(R.id.explore_games);
@@ -86,6 +111,7 @@ public class ExploreActivity extends AppCompatActivity {
         businessButton.setOnClickListener(new CategoryButtonListener("Business", ExploreActivity.this));
         techButton.setOnClickListener(new CategoryButtonListener("Tech", ExploreActivity.this));
         travelButton.setOnClickListener(new CategoryButtonListener("Travel", ExploreActivity.this));
+        favoriteList();
 
     }
 
@@ -189,4 +215,77 @@ public class ExploreActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar,menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.toolbar_profile:
+                Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.toolbar_serach:
+                Intent intent1 = new Intent(getApplicationContext(),SearchActivity.class);
+                startActivity(intent1);
+                return true;
+            case R.id.toolbar_feedback:
+                Intent intent2 = new Intent(getApplicationContext(),FeedbackActivity.class);
+                startActivity(intent2);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    public void favoriteList(){
+        db.collection("Users").document(currentUser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot myDoc = task.getResult();
+
+                    favorite = (List<String>) myDoc.get("favoriteList");
+                    if (favorite != null) {
+                        int size = favorite.size() >3 ?3 :favorite.size();
+                        for (int i = 0; i < size; i++) {
+                            System.out.println(favorite.get(i));
+                            db.collection("Chatroom").document(favorite.get(i)).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot chatroomDoc = task.getResult();
+                                        String category = (String) chatroomDoc.getData().get(Chatroom.CATEGORY);
+                                        String chatName = (String) chatroomDoc.getData().get(Chatroom.CHAT_NAME);
+                                        String description = (String) chatroomDoc.getData().get(Chatroom.DESCRIPTION);
+                                        String likes = (String) chatroomDoc.getData().get(Chatroom.LIKES);
+                                        String creater_name = (String) chatroomDoc.getData().get(Chatroom.CREATER);
+                                        String date = (String) chatroomDoc.getData().get(Chatroom.DATE);
+                                        String chat_id = (String) chatroomDoc.getData().get(Chatroom.CHAT_ID);
+                                        Chatroom tempChat = new Chatroom(chatName, category, creater_name, date);
+                                        tempChat.setChatId(chat_id);
+                                        tempChat.setLikes(likes);
+                                        tempChat.setDate(description);
+                                        chatrooms.add(tempChat);
+                                        adapter.notifyDataSetChanged();
+                                    }
+                                }
+                            });
+
+                        }
+                        adapter.notifyDataSetChanged();
+
+                    }else{
+                            faList.setText("Welcome!");
+                    }
+
+                }
+            }
+        });
+    }
+
+
 }

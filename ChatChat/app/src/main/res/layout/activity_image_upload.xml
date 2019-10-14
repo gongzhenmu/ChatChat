@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:context=".ImageActivity"
         tools:ignore="ExtraText">
@@ -21,10 +21,11 @@
             android:indeterminate="true"
             android:indeterminateTint="#1a09d6"
             android:max="100" />
+
         <ImageView
             android:id="@+id/ImageUpload_Image"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="388dp"
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
@@ -41,7 +42,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:text="image_activity_choose" />
+            android:textAllCaps="false"
+            android:text="Select" />
 
         <Button
             android:id="@+id/ImageUpload_Upload"
@@ -51,7 +53,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:text="image_activity_upload" />
+            android:textAllCaps="false"
+            android:text="Upload" />
 
 
 

@@ -6,23 +6,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardview_chatroom"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginTop="20dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginEnd="8dp"
+    app:cardCornerRadius="30dp"
+    >
 
-    android:layout_marginRight="20dp">
 
 
-    <TextView
-        android:id="@+id/cardview_chatname"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
-        android:background="@color/common_google_signin_btn_text_light_disabled"
-        android:text="test"
-        android:gravity="center_vertical"
-        android:textSize="20sp"
-        />
+        android:orientation="vertical"
+        android:background="#FFFFE8">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/image_item_ImageView"
+                android:layout_width="match_parent"
+                android:clickable="true"
+                android:layout_height="100dp"
+                />
+            <TextView
+                android:id="@+id/cardview_chatname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/image_item_ImageView"
+                android:layout_alignTop="@+id/image_item_ImageView"
+                android:layout_alignRight="@+id/image_item_ImageView"
+                android:layout_alignBottom="@+id/image_item_ImageView"
+                android:layout_margin="1dp"
+                android:gravity="center"
+                android:text="Hello"
+                android:textSize="30dp"
+                android:textColor="#000000" />
+        </RelativeLayout>
+
+    </LinearLayout>
 
 
 </androidx.cardview.widget.CardView>

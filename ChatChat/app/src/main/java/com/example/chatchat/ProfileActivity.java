@@ -73,31 +73,33 @@ public class ProfileActivity extends AppCompatActivity {
                     txtName.setText(myDoc.getString("chatName"));
                     txtEmail.setText(myDoc.getString("userEmail"));
                     favorite = (List<String>) myDoc.get("favoriteList");
-                    for(int i = 0; i<favorite.size();i++){
-                        System.out.println(favorite.get(i));
-                        db.collection("Chatroom").document(favorite.get(i)).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
-                                    DocumentSnapshot chatroomDoc = task.getResult();
-                                    String category = (String)chatroomDoc.getData().get(Chatroom.CATEGORY);
-                                    String chatName = (String)chatroomDoc.getData().get(Chatroom.CHAT_NAME);
-                                    String description = (String)chatroomDoc.getData().get(Chatroom.DESCRIPTION);
-                                    String likes = (String)chatroomDoc.getData().get(Chatroom.LIKES);
-                                    String creater_name = (String)chatroomDoc.getData().get(Chatroom.CREATER);
-                                    String date = (String)chatroomDoc.getData().get(Chatroom.DATE);
-                                    String chat_id = (String)chatroomDoc.getData().get(Chatroom.CHAT_ID);
-                                    Chatroom tempChat = new Chatroom(chatName, category, creater_name, date);
-                                    tempChat.setChatId(chat_id);
-                                    tempChat.setLikes(likes);
-                                    tempChat.setDate(description);
+                    if(favorite !=null) {
+                        for (int i = 0; i < favorite.size(); i++) {
+                            System.out.println(favorite.get(i));
+                            db.collection("Chatroom").document(favorite.get(i)).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot chatroomDoc = task.getResult();
+                                        String category = (String) chatroomDoc.getData().get(Chatroom.CATEGORY);
+                                        String chatName = (String) chatroomDoc.getData().get(Chatroom.CHAT_NAME);
+                                        String description = (String) chatroomDoc.getData().get(Chatroom.DESCRIPTION);
+                                        String likes = (String) chatroomDoc.getData().get(Chatroom.LIKES);
+                                        String creater_name = (String) chatroomDoc.getData().get(Chatroom.CREATER);
+                                        String date = (String) chatroomDoc.getData().get(Chatroom.DATE);
+                                        String chat_id = (String) chatroomDoc.getData().get(Chatroom.CHAT_ID);
+                                        Chatroom tempChat = new Chatroom(chatName, category, creater_name, date);
+                                        tempChat.setChatId(chat_id);
+                                        tempChat.setLikes(likes);
+                                        tempChat.setDate(description);
 
-                                    chatrooms.add(tempChat);
-                                    adapter.notifyDataSetChanged();
+                                        chatrooms.add(tempChat);
+                                        adapter.notifyDataSetChanged();
+                                    }
                                 }
-                            }
-                        });
+                            });
 
+                        }
                     }
                     adapter.notifyDataSetChanged();
 

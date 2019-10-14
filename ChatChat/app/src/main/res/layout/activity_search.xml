@@ -12,6 +12,14 @@
         android:textSize="25sp"
         android:background="@color/colorPrimary"
         />
+    <Button
+        android:id="@+id/search_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/colorAccent"
+        android:text="SEARCH"
+        android:textColor="@android:color/white" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/activity_search_recyclerview"
@@ -20,12 +28,5 @@
         android:clipToPadding="false"
         />
 
-    <Button
-        android:id="@+id/search_button"
-        android:layout_width="236dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:backgroundTint="@color/colorAccent"
-        android:text="SEARCH"
-        android:textColor="@android:color/white" />
+
 </LinearLayout>

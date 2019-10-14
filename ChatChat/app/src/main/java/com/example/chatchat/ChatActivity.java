@@ -227,30 +227,30 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
-    public void retriveMessage() {
-        CollectionReference messageRef = db.collection("Chatroom").document(chatroom_id).
-                collection("Messages");
-        messageRef.orderBy("timestamp", Query.Direction.ASCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot doc : task.getResult()) {
-                        String content = (String) doc.getData().get(Message.CONTENT);
-                        String date = (String) doc.getData().get(Message.DATE);
-                        String timestamp = (String) doc.getData().get(Message.TIMESTAMP);
-                        String url = (String) doc.getData().get(Message.URL);
-                        String user_id = (String) doc.getData().get(Message.USER_ID);
-                        String username = (String) doc.getData().get(Message.USERNAME);
-                        Message tmpMessage = new Message(content, username, url, user_id, date);
-                        tmpMessage.setTimestamp(timestamp);
-                        messageArrayList.add(tmpMessage);
-                        adapter.notifyDataSetChanged();
-                    }
-                }
-            }
-        });
-
-    }
+//    public void retriveMessage() {
+//        CollectionReference messageRef = db.collection("Chatroom").document(chatroom_id).
+//                collection("Messages");
+//        messageRef.orderBy("timestamp", Query.Direction.ASCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    for (QueryDocumentSnapshot doc : task.getResult()) {
+//                        String content = (String) doc.getData().get(Message.CONTENT);
+//                        String date = (String) doc.getData().get(Message.DATE);
+//                        String timestamp = (String) doc.getData().get(Message.TIMESTAMP);
+//                        String url = (String) doc.getData().get(Message.URL);
+//                        String user_id = (String) doc.getData().get(Message.USER_ID);
+//                        String username = (String) doc.getData().get(Message.USERNAME);
+//                        Message tmpMessage = new Message(content, username, url, user_id, date);
+//                        tmpMessage.setTimestamp(timestamp);
+//                        messageArrayList.add(tmpMessage);
+//                        adapter.notifyDataSetChanged();
+//                    }
+//                }
+//            }
+//        });
+//
+//    }
 
     public void receiveMessage() {
         CollectionReference messageRef = db.collection("Chatroom").document(chatroom_id).

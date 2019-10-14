@@ -70,6 +70,7 @@ public class UserProfileActivity extends AppCompatActivity {
                     txtName.setText(myDoc.getString("chatName"));
                     txtEmail.setText(myDoc.getString("userEmail"));
                     favorite = (List<String>) myDoc.get("favoriteList");
+                    if(favorite !=null){
                     for(int i = 0; i<favorite.size();i++){
                         System.out.println(favorite.get(i));
                         db.collection("Chatroom").document(favorite.get(i)).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -95,8 +96,10 @@ public class UserProfileActivity extends AppCompatActivity {
                         });
 
                     }
-                    adapter.notifyDataSetChanged();
 
+
+                    }
+                    adapter.notifyDataSetChanged();
                 }
             }
         });

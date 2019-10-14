@@ -15,6 +15,7 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -61,12 +62,9 @@ public class ChatActivity extends AppCompatActivity {
 
     private ArrayList<Message> messageArrayList;
     private List<String> fList = new ArrayList<>();
-    private ToggleButton button_like;
+    private ToggleButton toggle_button_like;
     private int numberOfLikes;
-    private int numberOfFavoriteRooms;
     private ChatAdapter adapter;
-    //used for elimination false action when the default value of the button is false
-    private int defaultNum = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,7 +150,7 @@ public class ChatActivity extends AppCompatActivity {
         });
 
         //add to favorite list
-        button_like = (ToggleButton)findViewById(R.id.activity_chat_button_like);
+        toggle_button_like = (ToggleButton)findViewById(R.id.activity_chat_button_like);
         userRf.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -161,9 +159,8 @@ public class ChatActivity extends AppCompatActivity {
                     if (document.exists()) {
                         if(document.contains("favoriteList")) {
                             fList = (List<String>) document.get("favoriteList");
-                            numberOfFavoriteRooms = fList.size();
                             if (fList.contains(chatroom_id)) {
-                                button_like.setChecked(true);
+                                toggle_button_like.setChecked(true);
                             }
                         }
                     } else {
@@ -176,11 +173,14 @@ public class ChatActivity extends AppCompatActivity {
         });
 
         //when the button changes state
-        button_like.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+        toggle_button_like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean isChecked = toggle_button_like.isChecked();
                 if (isChecked && !fList.contains(chatroom_id)) {
                     // The toggle is enabled
-                    if(numberOfFavoriteRooms < 10) {
+                    if(fList.size() < 10) {
                         numberOfLikes++;
                         fList.add(chatroom_id);
                         userRf.update("favoriteList", fList);
@@ -190,7 +190,7 @@ public class ChatActivity extends AppCompatActivity {
                         Toast.makeText(ChatActivity.this, "Exceed 10 favorite room limit, please delete one first", Toast.LENGTH_LONG).show();
                 } else {
                     // The toggle is disabled
-                    if(defaultNum++ != 0 && fList.contains(chatroom_id)){
+                    if(fList.contains(chatroom_id)){
                         fList.remove(chatroom_id);
                         numberOfLikes --;
                         userRf.update("favoriteList", fList);

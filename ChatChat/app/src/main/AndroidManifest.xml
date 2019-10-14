@@ -50,6 +50,9 @@
             android:name=".ChangeUserNameActivity"
             android:theme="@style/AppTheme" />
         <activity
+            android:name=".ChatRoomInfoActivity"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".CreateProfileActivity"
             android:label="@string/login"
             android:theme="@style/AppTheme" />

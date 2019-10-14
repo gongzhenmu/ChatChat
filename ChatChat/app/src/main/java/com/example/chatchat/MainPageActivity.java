@@ -58,10 +58,9 @@ public class MainPageActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.toolbar_serach:
+                Intent intent1 = new Intent(getApplicationContext(),SearchActivity.class);
+                startActivity(intent1);
                 return true;
-
-
-
         }
         return super.onOptionsItemSelected(item);
     }

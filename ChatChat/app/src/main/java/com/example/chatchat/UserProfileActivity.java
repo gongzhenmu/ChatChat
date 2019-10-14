@@ -2,6 +2,8 @@ package com.example.chatchat;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -16,6 +18,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import Adapter.ChatRoomListAdapter;
+import model.Chatroom;
+
 public class UserProfileActivity extends AppCompatActivity {
     private ImageView imgAvator;
     private TextView txtName;
@@ -24,11 +32,24 @@ public class UserProfileActivity extends AppCompatActivity {
     private String imgDir = "https://firebasestorage.googleapis.com/v0/b/cs408-project.appspot.com/o/";
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+    private List<String> favorite;
+    private RecyclerView rv;
+    private ChatRoomListAdapter adapter;
+    private ArrayList<Chatroom> chatrooms;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+        rv = (RecyclerView)findViewById(R.id.UserProfile_recyclerview);
+        LinearLayoutManager llm = new LinearLayoutManager(UserProfileActivity.this);
+        rv.setLayoutManager(llm);
+        chatrooms = new ArrayList<>();
+        adapter = new ChatRoomListAdapter(chatrooms, UserProfileActivity.this);
+        rv.setAdapter(adapter);
+
+
         imgAvator = (ImageView)findViewById(R.id.userProfile_image);
         txtName = (TextView)findViewById(R.id.userProfile_Name);
         txtEmail = (TextView)findViewById(R.id.userProfile_email);
@@ -46,9 +67,35 @@ public class UserProfileActivity extends AppCompatActivity {
                         Picasso.get().load(imgDir + myDoc.getString("imgurl")).fit().into(imgAvator);
                     }
 
-                    Toast.makeText(UserProfileActivity.this, myDoc.getString("imgurl"), Toast.LENGTH_LONG).show();
                     txtName.setText(myDoc.getString("chatName"));
                     txtEmail.setText(myDoc.getString("userEmail"));
+                    favorite = (List<String>) myDoc.get("favoriteList");
+                    for(int i = 0; i<favorite.size();i++){
+                        System.out.println(favorite.get(i));
+                        db.collection("Chatroom").document(favorite.get(i)).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot chatroomDoc = task.getResult();
+                                    String category = (String)chatroomDoc.getData().get(Chatroom.CATEGORY);
+                                    String chatName = (String)chatroomDoc.getData().get(Chatroom.CHAT_NAME);
+                                    String description = (String)chatroomDoc.getData().get(Chatroom.DESCRIPTION);
+                                    String likes = (String)chatroomDoc.getData().get(Chatroom.LIKES);
+                                    String creater_name = (String)chatroomDoc.getData().get(Chatroom.CREATER);
+                                    String date = (String)chatroomDoc.getData().get(Chatroom.DATE);
+                                    String chat_id = (String)chatroomDoc.getData().get(Chatroom.CHAT_ID);
+                                    Chatroom tempChat = new Chatroom(chatName, category, creater_name, date);
+                                    tempChat.setChatId(chat_id);
+                                    tempChat.setLikes(likes);
+                                    tempChat.setDate(description);
+                                    chatrooms.add(tempChat);
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+                        });
+
+                    }
+                    adapter.notifyDataSetChanged();
 
                 }
             }
@@ -58,6 +105,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
 
     }
+
     @Override
     public void onBackPressed() {
         //onSupportNavigateUp();

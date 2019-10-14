@@ -74,6 +74,11 @@
             android:text="Favorite LIST"
             android:gravity="center"
             android:textColor="#000000" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/profile_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"/>
 
 
     </LinearLayout>

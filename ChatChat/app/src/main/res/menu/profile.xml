@@ -16,9 +16,6 @@
     <item android:id = "@+id/settings_username"
         android:title="Username"
         app:showAsAction="never"/>
-    <item android:id = "@+id/settings_usertest"
-        android:title="otheruserTest"
-        app:showAsAction="never"/>
 
 
 </menu>

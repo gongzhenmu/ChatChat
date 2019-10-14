@@ -20,6 +20,14 @@ import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import Adapter.ChatRoomListAdapter;
+import model.Chatroom;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -29,15 +37,21 @@ public class ProfileActivity extends AppCompatActivity {
     private String imgDir = "https://firebasestorage.googleapis.com/v0/b/cs408-project.appspot.com/o/";
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
-
+    private List<String> favorite;
+    private RecyclerView rv;
+    private ChatRoomListAdapter adapter;
+    private ArrayList<Chatroom> chatrooms;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-       // btnChangeUid = (Button) findViewById(R.id.profile_changeUID);
-
-       // btnChangePassword = (Button) findViewById(R.id.profile_changePassword);
+        rv = (RecyclerView)findViewById(R.id.profile_recyclerview);
+        LinearLayoutManager llm = new LinearLayoutManager(ProfileActivity.this);
+        rv.setLayoutManager(llm);
+        chatrooms = new ArrayList<Chatroom>();
+        adapter = new ChatRoomListAdapter(chatrooms, ProfileActivity.this);
+        rv.setAdapter(adapter);
 
         imgProfilePic = (ImageView) findViewById(R.id.profile_image);
         txtName = (TextView) findViewById(R.id.profile_userName);
@@ -56,13 +70,42 @@ public class ProfileActivity extends AppCompatActivity {
                         Picasso.get().load(imgDir + myDoc.getString("imgurl")).fit().into(imgProfilePic);
                     }
 
-                    Toast.makeText(ProfileActivity.this, myDoc.getString("imgurl"), Toast.LENGTH_LONG).show();
                     txtName.setText(myDoc.getString("chatName"));
                     txtEmail.setText(myDoc.getString("userEmail"));
+                    favorite = (List<String>) myDoc.get("favoriteList");
+                    for(int i = 0; i<favorite.size();i++){
+                        System.out.println(favorite.get(i));
+                        db.collection("Chatroom").document(favorite.get(i)).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot chatroomDoc = task.getResult();
+                                    String category = (String)chatroomDoc.getData().get(Chatroom.CATEGORY);
+                                    String chatName = (String)chatroomDoc.getData().get(Chatroom.CHAT_NAME);
+                                    String description = (String)chatroomDoc.getData().get(Chatroom.DESCRIPTION);
+                                    String likes = (String)chatroomDoc.getData().get(Chatroom.LIKES);
+                                    String creater_name = (String)chatroomDoc.getData().get(Chatroom.CREATER);
+                                    String date = (String)chatroomDoc.getData().get(Chatroom.DATE);
+                                    String chat_id = (String)chatroomDoc.getData().get(Chatroom.CHAT_ID);
+                                    Chatroom tempChat = new Chatroom(chatName, category, creater_name, date);
+                                    tempChat.setChatId(chat_id);
+                                    tempChat.setLikes(likes);
+                                    tempChat.setDate(description);
+
+                                    chatrooms.add(tempChat);
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+                        });
+
+                    }
+                    adapter.notifyDataSetChanged();
 
                 }
             }
         });
+
+
 
         imgProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,11 +135,6 @@ public class ProfileActivity extends AppCompatActivity {
             case R.id.settings_password:
                 changePassword();
                 return true;
-            case R.id.settings_usertest:
-                otherUser();
-                return true;
-
-
 
         }
         return super.onOptionsItemSelected(item);
@@ -120,11 +158,6 @@ public class ProfileActivity extends AppCompatActivity {
     }
     private void changePassword(){
         Intent intent = new Intent(getApplicationContext(), ChangePasswordActivity.class);
-        startActivity(intent);
-    }
-    private void otherUser(){
-        Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
-        intent.putExtra("UID","pA2ScUYVbsMTq1vP6cys3Fe2Uoh1");
         startActivity(intent);
     }
     @Override

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/count"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/heart"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="50dp"
+        android:text="0"
+        android:textSize="32dp" />
+
+    <ImageView
+        android:id="@+id/heart"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignRight="@+id/chatName"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/heart" />
+
+    <TextView
+        android:id="@+id/chatName"
+        android:layout_width="341dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Chat Name"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chatName"
+        android:layout_marginTop="50dp"
+        android:maxLines="10"
+        android:lines="5"
+        android:textSize="20dp"
+        android:text="No description" />
+</RelativeLayout>
+</LinearLayout>

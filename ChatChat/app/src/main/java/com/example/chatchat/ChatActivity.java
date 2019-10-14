@@ -10,11 +10,13 @@ import model.Chatroom;
 import model.Message;
 import model.User;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -57,6 +59,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private ArrayList<Message> messageArrayList;
     private ChatAdapter adapter;
+    private ImageButton informationbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +78,7 @@ public class ChatActivity extends AppCompatActivity {
         adapter = new ChatAdapter(messageArrayList, user_uid, ChatActivity.this);
         rv.setAdapter(adapter);
 
-
+        informationbtn = findViewById(R.id.activity_chat_button_info);
         chatroom_id =  getIntent().getStringExtra("Chatroom_ID");
         chatroom_name = getIntent().getStringExtra("Chatroom_NAME");
         titleText = (TextView)findViewById(R.id.activity_chat_title);
@@ -89,7 +92,14 @@ public class ChatActivity extends AppCompatActivity {
                 return false;
             }
     });
-
+        informationbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChatActivity.this, ChatRoomInfoActivity.class);
+                intent.putExtra("Chatroom_ID", chatroom_id);
+                startActivity(intent);
+            }
+        });
         //get  username for current user
         username = "null_username";
         DocumentReference userRf = db.collection("Users").document(user_uid);

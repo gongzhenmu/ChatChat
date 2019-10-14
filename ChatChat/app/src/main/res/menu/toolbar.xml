@@ -15,6 +15,11 @@
         app:showAsAction="always"
         />
 
+    <item android:id = "@+id/toolbar_feedback"
+        android:icon="@drawable/ic_mail_black_24dp"
+        android:title="Profile"
+        app:showAsAction="always"
+        />
 
 
 </menu>

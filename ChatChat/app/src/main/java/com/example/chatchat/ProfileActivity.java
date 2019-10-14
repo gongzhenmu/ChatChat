@@ -29,12 +29,13 @@ public class ProfileActivity extends AppCompatActivity {
     private String imgDir = "https://firebasestorage.googleapis.com/v0/b/cs408-project.appspot.com/o/";
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
-
+    private Button btnFeedback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
        // btnChangeUid = (Button) findViewById(R.id.profile_changeUID);
 
        // btnChangePassword = (Button) findViewById(R.id.profile_changePassword);
@@ -74,6 +75,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     }
+
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

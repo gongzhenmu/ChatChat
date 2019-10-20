@@ -59,6 +59,24 @@ public class ProfileActivity extends AppCompatActivity {
        // btnOtherUser=(Button) findViewById(R.id.profile_otheruser);
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+        showProfile();
+
+
+
+
+        imgProfilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageUpload();
+
+            }
+        });
+
+
+    }
+
+    public void showProfile(){
+
         db.collection("Users").document(mAuth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -74,6 +92,7 @@ public class ProfileActivity extends AppCompatActivity {
                     txtEmail.setText(myDoc.getString("userEmail"));
                     favorite = (List<String>) myDoc.get("favoriteList");
                     if(favorite !=null) {
+                        chatrooms.clear();
                         for (int i = 0; i < favorite.size(); i++) {
                             System.out.println(favorite.get(i));
                             db.collection("Chatroom").document(favorite.get(i)).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -106,18 +125,6 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
-        imgProfilePic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                imageUpload();
-
-            }
-        });
-
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -161,6 +168,15 @@ public class ProfileActivity extends AppCompatActivity {
     private void changePassword(){
         Intent intent = new Intent(getApplicationContext(), ChangePasswordActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onRestart()
+    {  // After a pause OR at startup
+        super.onRestart();
+       //
+       showProfile();
+
     }
     @Override
     public void onBackPressed() {

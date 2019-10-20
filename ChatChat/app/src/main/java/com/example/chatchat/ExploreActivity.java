@@ -250,6 +250,7 @@ public class ExploreActivity extends AppCompatActivity {
 
                     favorite = (List<String>) myDoc.get("favoriteList");
                     if (favorite != null) {
+                        chatrooms.clear();
                         int size = favorite.size() >3 ?3 :favorite.size();
                         for (int i = 0; i < size; i++) {
                             System.out.println(favorite.get(i));
@@ -285,6 +286,15 @@ public class ExploreActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onRestart()
+    {  // After a pause OR at startup
+        super.onRestart();
+
+        favoriteList();
+
     }
 
 

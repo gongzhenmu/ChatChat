@@ -65,6 +65,7 @@ public class ChatActivity extends AppCompatActivity {
     private int numberOfLikes;
     private ChatAdapter adapter;
     private ImageButton informationbtn;
+    private String inputRegex = "^[a-zA-Z0-9][\\w\\s]*[.,!?]*";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,16 +126,31 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String message_content = "";
                 message_content = editText.getText().toString();
-                Long ts = System.currentTimeMillis() / 1000;
-                String timestamp = ts.toString();
-                Calendar cal = Calendar.getInstance(Locale.ENGLISH);
-                cal.setTimeInMillis(ts * 1000);
-                String date = DateFormat.format("dd-MM-yyyy hh:mm:ss", cal).toString();
-                Message message = new Message(message_content, username, imgurl, user_uid, date);
-                message.setTimestamp(timestamp);
-                sendMessage(message);
-                Toast.makeText(ChatActivity.this, "sending successful", Toast.LENGTH_LONG).show();
-                editText.setText(" ");
+                //check if message_content is a valid input
+                if(message_content.length() == 0)
+                {
+                    Toast.makeText(ChatActivity.this, "Empty message!", Toast.LENGTH_LONG).show();
+                }else if(!message_content.matches(inputRegex))
+                {
+                    Toast.makeText(ChatActivity.this, "message contains invalid input!", Toast.LENGTH_LONG).show();
+                }else if(message_content.length() > 150)
+                {
+                    Toast.makeText(ChatActivity.this, "Message too long!", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Long ts = System.currentTimeMillis() / 1000;
+                    String timestamp = ts.toString();
+                    Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+                    cal.setTimeInMillis(ts * 1000);
+                    String date = DateFormat.format("dd-MM-yyyy hh:mm:ss", cal).toString();
+                    Message message = new Message(message_content, username, imgurl, user_uid, date);
+                    message.setTimestamp(timestamp);
+                    sendMessage(message);
+                    Toast.makeText(ChatActivity.this, "sent", Toast.LENGTH_LONG).show();
+                    editText.setText("");
+                }
+
             }
         });
 

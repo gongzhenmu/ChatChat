@@ -99,8 +99,7 @@ public class ExploreActivityTest {
         }
 
         onView(withId(R.id.explore_create)).perform(click());
-        onView(withId(R.id.createchat_name_text)).perform(typeText("chatname@$"), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.createchat_des_text)).perform(typeText("testing invalid chatname."), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.createchat_name_text)).perform(typeText("chatname"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.createchat_category_spinner)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("Sports")))
                 .perform(click());

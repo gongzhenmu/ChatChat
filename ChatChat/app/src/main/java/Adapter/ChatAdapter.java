@@ -12,8 +12,13 @@ import android.widget.Toast;
 import com.example.chatchat.ChatActivity;
 import com.example.chatchat.R;
 import com.example.chatchat.UserProfileActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -23,7 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import model.Chatroom;
 import model.Message;
-
+import model.User;
 
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHolder> {
@@ -32,6 +37,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
     public static final int MESSAGE_RIGHT = 1;
 
     private Context context;
+    private FirebaseFirestore db;
     private ArrayList<Message> messageArrayList;
     private String user_uid;
     private String imgDir = "https://firebasestorage.googleapis.com/v0/b/cs408-project.appspot.com/o/";
@@ -41,6 +47,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
         this.context = context;
         this.messageArrayList = messageArrayList;
         user_uid = uid;
+        db = FirebaseFirestore.getInstance();
 
     }
 
@@ -77,12 +84,19 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
         * Add clickListener for ImageView and display profile picture
         * for holder.profile_picture
         * */
+        String message_user_uid = message.getUserId();
+        DocumentReference userRef = db.collection("Users").document(message_user_uid);
+        userRef.get().addOnCompleteListener(new MessageOnCompleteListener(holder));
 
+
+        /*
         if(message.getUrl().length()==0){
             Picasso.get().load(imgDir + "default-avatar.png?alt=media&token=af33a9b5-b4f4-4d44-8c1b-671caf2181c6").fit().into(holder.profile_picture);
         }else{
             Picasso.get().load(imgDir + message.getUrl()).fit().into(holder.profile_picture);
         }
+
+         */
 
 
     }
@@ -151,4 +165,30 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
             context.startActivity(intent);
         }
     }
+
+    private class MessageOnCompleteListener implements OnCompleteListener<DocumentSnapshot>
+    {
+        private MessageViewHolder holder;
+
+        public MessageOnCompleteListener(MessageViewHolder holder)
+        {
+            this.holder = holder;
+        }
+
+        @Override
+        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+            if (task.isSuccessful()) {
+                DocumentSnapshot userDoc = task.getResult();
+                String username = (String) userDoc.getData().get(User.CHAT_NAME);
+                String imgurl = (String) userDoc.getData().get(User.IMAGE);
+                holder.username.setText(username);
+                if(imgurl.length()==0){
+                    Picasso.get().load(imgDir + "default-avatar.png?alt=media&token=af33a9b5-b4f4-4d44-8c1b-671caf2181c6").fit().into(holder.profile_picture);
+                }else{
+                    Picasso.get().load(imgDir + imgurl).fit().into(holder.profile_picture);
+                }
+            }
+        }
+    }
+
 }

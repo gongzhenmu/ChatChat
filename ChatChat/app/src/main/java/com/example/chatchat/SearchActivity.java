@@ -45,12 +45,15 @@ public class SearchActivity extends AppCompatActivity {
         adapter = new ChatRoomListAdapter(chatrooms, SearchActivity.this);
         recyclerView.setAdapter(adapter);
         button = findViewById(R.id.search_button);
-        Query chatroomQuery = db.collection("Chatroom").whereEqualTo("chatName", mSearch.getText().toString());
+        //Query chatroomQuery = db.collection("Chatroom").whereEqualTo("chatName", mSearch.getText().toString());
         Log.d("ChatroomList", "getting query from db");
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Query chatroomQuery = db.collection("Chatroom").whereEqualTo("chatName", mSearch.getText().toString());
+                chatrooms.clear();
+                adapter.notifyDataSetChanged();
+                Query chatroomQuery = db.collection("Chatroom").
+                        orderBy("chatName", Query.Direction.ASCENDING).startAt( mSearch.getText().toString()).endAt(mSearch.getText().toString()+ "\uf8ff");
                 Log.d("ChatroomList", "getting query from db");
                 chatroomQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -59,7 +62,7 @@ public class SearchActivity extends AppCompatActivity {
                             Log.d("ChatroomList", "getting rooms from db");
 
                             for (QueryDocumentSnapshot chatroomDoc : task.getResult()) {
-                                Log.d("ChatroomList", "getting single room attributes from db");
+                                //Log.d("ChatroomList", "getting single room attributes from db");
                                 String category = (String) chatroomDoc.getData().get(Chatroom.CATEGORY);
                                 String chatName = (String) chatroomDoc.getData().get(Chatroom.CHAT_NAME);
                                 String description = (String) chatroomDoc.getData().get(Chatroom.DESCRIPTION);
@@ -67,7 +70,6 @@ public class SearchActivity extends AppCompatActivity {
                                 String creater_name = (String) chatroomDoc.getData().get(Chatroom.CREATER);
                                 String date = (String) chatroomDoc.getData().get(Chatroom.DATE);
                                 String chat_id = (String) chatroomDoc.getData().get(Chatroom.CHAT_ID);
-
                                 Chatroom tempChat = new Chatroom(chatName, category, creater_name, date);
                                 tempChat.setChatId(chat_id);
                                 tempChat.setLikes(likes);

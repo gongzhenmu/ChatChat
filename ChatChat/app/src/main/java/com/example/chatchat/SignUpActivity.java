@@ -68,7 +68,7 @@ public class SignUpActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
-                        Toast.makeText(SignUpActivity.this, "successfully add user to authentication", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(SignUpActivity.this, "successfully add user to authentication", Toast.LENGTH_LONG).show();
                         FirebaseUser user = firebaseAuth.getCurrentUser();
                         addUser();
                     } else {
@@ -90,7 +90,7 @@ public class SignUpActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(SignUpActivity.this, "successfully create an account", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(SignUpActivity.this, "successfully create an account", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(SignUpActivity.this, ExploreActivity.class);
                         startActivity(intent);
                         finish();

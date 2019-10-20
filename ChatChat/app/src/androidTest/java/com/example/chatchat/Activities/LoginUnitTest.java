@@ -3,8 +3,6 @@ package com.example.chatchat.Activities;
 import android.content.Intent;
 
 import com.example.chatchat.LoginActivity;
-import com.example.chatchat.MainPageActivity;
-import com.example.chatchat.ProfileActivity;
 import com.example.chatchat.R;
 
 import org.junit.Rule;
@@ -17,9 +15,7 @@ import androidx.test.rule.ActivityTestRule;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 
 @LargeTest
@@ -38,6 +34,11 @@ public class LoginUnitTest {
         onView(withId(R.id.password)).perform(new TypeTextAction("12345678"));
         onView(withId(R.id.password)).perform(closeSoftKeyboard());
         onView(withId(R.id.login_bt)).perform(click());
+        try {
+            Thread.sleep(1000);
+        }catch (Exception e){
+            return;
+        }
         activityRule.finishActivity();
     }
 

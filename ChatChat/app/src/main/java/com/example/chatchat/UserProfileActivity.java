@@ -83,7 +83,6 @@ public class UserProfileActivity extends AppCompatActivity {
                     if(favorite !=null){
                         chatrooms.clear();
                         for(int i = 0; i<favorite.size();i++){
-                            System.out.println(favorite.get(i));
                             db.collection("Chatroom").document(favorite.get(i)).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {

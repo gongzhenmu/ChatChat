@@ -82,7 +82,7 @@ public class ExploreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_explore);
 
         rv = (RecyclerView)findViewById(R.id.explore_recyclerview);
-        LinearLayoutManager llm = new LinearLayoutManager(ExploreActivity.this);
+        LinearLayoutManager llm = new LinearLayoutManager(ExploreActivity.this,LinearLayoutManager.HORIZONTAL,false);
         rv.setLayoutManager(llm);
         chatrooms = new ArrayList<>();
         adapter = new ChatRoomListAdapter(chatrooms, ExploreActivity.this);
@@ -251,9 +251,7 @@ public class ExploreActivity extends AppCompatActivity {
                     favorite = (List<String>) myDoc.get("favoriteList");
                     if (favorite != null) {
                         chatrooms.clear();
-                        int size = favorite.size() >3 ?3 :favorite.size();
-                        for (int i = 0; i < size; i++) {
-                            System.out.println(favorite.get(i));
+                        for (int i = 0; i < favorite.size(); i++) {
                             db.collection("Chatroom").document(favorite.get(i)).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -280,7 +278,7 @@ public class ExploreActivity extends AppCompatActivity {
                         adapter.notifyDataSetChanged();
 
                     }else{
-                            faList.setText("Welcome!");
+                        faList.setText("Welcome!");
                     }
 
                 }

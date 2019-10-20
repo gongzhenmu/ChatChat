@@ -65,7 +65,7 @@ public class ChatActivity extends AppCompatActivity {
     private int numberOfLikes;
     private ChatAdapter adapter;
     private ImageButton informationbtn;
-    private String inputRegex = "^[a-zA-Z0-9][\\w\\s]*[.,!?]*";
+    private String inputRegex = "^[a-zA-Z0-9][\\w\\s]*[.,_+=\";!?]*";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +87,10 @@ public class ChatActivity extends AppCompatActivity {
         informationbtn = findViewById(R.id.activity_chat_button_info);
 
         chatroom_id = getIntent().getStringExtra("Chatroom_ID");
+        if(chatroom_id == null)
+        {
+            chatroom_id = "7olaE7ARKCpNafKZsq85";
+        }
         chatroom_name = getIntent().getStringExtra("Chatroom_NAME");
         titleText = (TextView) findViewById(R.id.activity_chat_title);
         titleText.setText(chatroom_name);
@@ -300,5 +304,11 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void setChatroom_id_for_testing()
+    {
+        chatroom_id = "7olaE7ARKCpNafKZsq85";
+    }
+
 
 }

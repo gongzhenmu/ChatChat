@@ -65,7 +65,7 @@ public class ChatActivity extends AppCompatActivity {
     private int numberOfLikes;
     private ChatAdapter adapter;
     private ImageButton informationbtn;
-    private String inputRegex = "^[a-zA-Z0-9][\\w\\s]*[.,_+=\";!?]*";
+    private String inputRegex = "^[a-zA-Z0-9][\\w\\s]*[.,_+=\";'!?]*";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.rule.ActivityTestRule;
+import androidx.test.espresso.contrib.RecyclerViewActions;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;

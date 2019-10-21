@@ -73,8 +73,12 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         db = FirebaseFirestore.getInstance();
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        user_uid = firebaseUser.getUid();
+        if(FirebaseAuth.getInstance().getCurrentUser()!= null)
+        {
+            firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+            user_uid = firebaseUser.getUid();
+        }
+
 
         rv = (RecyclerView) findViewById(R.id.activity_chat_message_recyclerView);
         LinearLayoutManager llm = new LinearLayoutManager(ChatActivity.this);
@@ -87,10 +91,6 @@ public class ChatActivity extends AppCompatActivity {
         informationbtn = findViewById(R.id.activity_chat_button_info);
 
         chatroom_id = getIntent().getStringExtra("Chatroom_ID");
-        if(chatroom_id == null)
-        {
-            chatroom_id = "7olaE7ARKCpNafKZsq85";
-        }
         chatroom_name = getIntent().getStringExtra("Chatroom_NAME");
         titleText = (TextView) findViewById(R.id.activity_chat_title);
         titleText.setText(chatroom_name);

@@ -48,6 +48,10 @@ dependencies {
     // FirebaseUI for Firebase Auth
     implementation 'com.firebaseui:firebase-ui-auth:6.0.2'
 
+
+    //mockito
+    testImplementation 'org.mockito:mockito-core:2.19.0'
+
 }
 apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle plugin
 

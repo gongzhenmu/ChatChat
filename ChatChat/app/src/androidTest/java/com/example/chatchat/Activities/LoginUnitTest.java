@@ -30,15 +30,10 @@ public class LoginUnitTest {
         Intent intent = new Intent();
         activityRule.launchActivity(intent);
         onView(withId(R.id.email)).perform(new TypeTextAction("user1@email.com"));
-        onView(withId(R.id.password)).perform(closeSoftKeyboard());
+        onView(withId(R.id.email)).perform(closeSoftKeyboard());
         onView(withId(R.id.password)).perform(new TypeTextAction("12345678"));
         onView(withId(R.id.password)).perform(closeSoftKeyboard());
         onView(withId(R.id.login_bt)).perform(click());
-        try {
-            Thread.sleep(1000);
-        }catch (Exception e){
-            return;
-        }
         activityRule.finishActivity();
     }
 
@@ -47,7 +42,7 @@ public class LoginUnitTest {
         Intent intent = new Intent();
         activityRule.launchActivity(intent);
         onView(withId(R.id.email)).perform(new TypeTextAction("user1@email.com"));
-        onView(withId(R.id.password)).perform(closeSoftKeyboard());
+        onView(withId(R.id.email)).perform(closeSoftKeyboard());
         onView(withId(R.id.password)).perform(new TypeTextAction("0000000000"));
         onView(withId(R.id.password)).perform(closeSoftKeyboard());
         onView(withId(R.id.login_bt)).perform(click());
@@ -59,7 +54,7 @@ public class LoginUnitTest {
         Intent intent = new Intent();
         activityRule.launchActivity(intent);
         onView(withId(R.id.email)).perform(new TypeTextAction("userWrong@email.com"));
-        onView(withId(R.id.password)).perform(closeSoftKeyboard());
+        onView(withId(R.id.email)).perform(closeSoftKeyboard());
         onView(withId(R.id.password)).perform(new TypeTextAction("12345678"));
         onView(withId(R.id.password)).perform(closeSoftKeyboard());
         onView(withId(R.id.login_bt)).perform(click());
@@ -72,7 +67,7 @@ public class LoginUnitTest {
         Intent intent = new Intent();
         activityRule.launchActivity(intent);
         onView(withId(R.id.email)).perform(new TypeTextAction("user1@email.com"));
-        onView(withId(R.id.password)).perform(closeSoftKeyboard());
+        onView(withId(R.id.email)).perform(closeSoftKeyboard());
         onView(withId(R.id.login_bt)).perform(click());
         activityRule.finishActivity();
 

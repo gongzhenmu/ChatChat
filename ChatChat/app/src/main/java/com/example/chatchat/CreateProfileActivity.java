@@ -61,7 +61,7 @@ public class CreateProfileActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     // Sign in success, update UI with the signed-in user's information
                     Toast.makeText(CreateProfileActivity.this, "successfully created user profile", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(CreateProfileActivity.this, MainPageActivity.class);
+                    Intent intent = new Intent(CreateProfileActivity.this, ExploreActivity.class);
                     startActivity(intent);
                     finish();
                 } else {

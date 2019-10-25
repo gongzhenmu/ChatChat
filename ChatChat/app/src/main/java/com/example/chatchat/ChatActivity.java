@@ -207,21 +207,15 @@ public class ChatActivity extends AppCompatActivity {
                 boolean isChecked = toggle_button_like.isChecked();
                 if (isChecked && !fList.contains(chatroom_id)) {
                     // The toggle is enabled
-                    if(fList.size() < 10) {
-                        numberOfLikes++;
-                        fList.add(chatroom_id);
-                        userRf.update("favoriteList", fList);
-                        chatroomRef.update("likes", Integer.toString(numberOfLikes));
-                    }
-                    else
-                        Toast.makeText(ChatActivity.this, "Exceed 10 favorite room limit, please delete one first", Toast.LENGTH_LONG).show();
+                    numberOfLikes++;
+                    fList.add(chatroom_id);
+                    userRf.update("favoriteList", fList);
                 } else {
                     // The toggle is disabled
                     if(fList.contains(chatroom_id)){
                         fList.remove(chatroom_id);
                         numberOfLikes --;
                         userRf.update("favoriteList", fList);
-                        chatroomRef.update("likes", Integer.toString(numberOfLikes));
                     }
                 }
             }

@@ -276,7 +276,7 @@ public class ChatActivity extends AppCompatActivity {
         CollectionReference messageRef = db.collection("Chatroom").document(chatroom_id).
                 collection("Messages");
         messageRef.orderBy("timestamp", Query.Direction.ASCENDING);
-        messageRef.addSnapshotListener(ChatActivity.this, new EventListener<QuerySnapshot>() {
+        messageRef.addSnapshotListener( new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 for (DocumentChange dc : queryDocumentSnapshots.getDocumentChanges()) {
@@ -292,7 +292,6 @@ public class ChatActivity extends AppCompatActivity {
                             tmpMessage.setTimestamp(timestamp);
                             messageArrayList.add(tmpMessage);
                             adapter.notifyDataSetChanged();
-                            rv.scrollToPosition(adapter.getItemCount() - 1);
                             break;
                         case MODIFIED:
                             break;

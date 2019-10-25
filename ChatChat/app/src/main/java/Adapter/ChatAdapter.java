@@ -84,19 +84,15 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
         * Add clickListener for ImageView and display profile picture
         * for holder.profile_picture
         * */
-        String message_user_uid = message.getUserId();
-        DocumentReference userRef = db.collection("Users").document(message_user_uid);
-        userRef.get().addOnCompleteListener(new MessageOnCompleteListener(holder));
 
 
-        /*
+
         if(message.getUrl().length()==0){
             Picasso.get().load(imgDir + "default-avatar.png?alt=media&token=af33a9b5-b4f4-4d44-8c1b-671caf2181c6").fit().into(holder.profile_picture);
         }else{
             Picasso.get().load(imgDir + message.getUrl()).fit().into(holder.profile_picture);
         }
 
-         */
 
 
     }
@@ -166,29 +162,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
         }
     }
 
-    private class MessageOnCompleteListener implements OnCompleteListener<DocumentSnapshot>
-    {
-        private MessageViewHolder holder;
 
-        public MessageOnCompleteListener(MessageViewHolder holder)
-        {
-            this.holder = holder;
-        }
-
-        @Override
-        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-            if (task.isSuccessful()) {
-                DocumentSnapshot userDoc = task.getResult();
-                String username = (String) userDoc.getData().get(User.CHAT_NAME);
-                String imgurl = (String) userDoc.getData().get(User.IMAGE);
-                holder.username.setText(username);
-                if(imgurl.length()==0){
-                    Picasso.get().load(imgDir + "default-avatar.png?alt=media&token=af33a9b5-b4f4-4d44-8c1b-671caf2181c6").fit().into(holder.profile_picture);
-                }else{
-                    Picasso.get().load(imgDir + imgurl).fit().into(holder.profile_picture);
-                }
-            }
-        }
-    }
 
 }

@@ -39,28 +39,15 @@ public class ResetPasswordActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (validateInputs(mEmail, mAuth)) {
                     // Send the user a password reset email
-                    if (mNumPressed >= 3) {
-                        Toast.makeText(getApplicationContext(),"An email has been sent 3 times, please check your inbox", Toast.LENGTH_SHORT).show();
-                    } else {
                         mAuth.sendPasswordResetEmail(mEmail.getText().toString());
                         mResendButton.setVisibility(View.VISIBLE);
-                        mNumPressed++;
-                        Toast.makeText(getApplicationContext(), "An email has been sent to you!", Toast.LENGTH_SHORT).show();
-                    }
                 }
             }
         });
         mResendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mNumPressed >= 3) {
-                    Toast.makeText(getApplicationContext(),"An email has been sent 3 times, please check your inbox", Toast.LENGTH_SHORT).show();
-                } else {
                     mAuth.sendPasswordResetEmail(mEmail.getText().toString());
-                    mNumPressed++;
-                    Toast.makeText(getApplicationContext(), "An email has been sent to you!", Toast.LENGTH_SHORT).show();
-                }
-
             }
         });
     }
@@ -72,19 +59,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
      * @return a boolean true if inputs are valid of false if not
      */
     private boolean validateInputs(EditText mEmail, FirebaseAuth auth) {
-        // If email is empty, prompt user with an error
-        if (mEmail.getText() == null) {
-            mEmail.setError("Email Address must not be empty!");
-            return false;
-        }
-        // If the email address is not valid, prompt the user with an error
-        else if (!Patterns.EMAIL_ADDRESS.matcher(mEmail.getText()).matches()) {
-            mEmail.setError("Not a valid Email Address!");
-            return false;
-        }
-        else {
             return validateEmail(mEmail, auth);
-        }
     }
 
     /**

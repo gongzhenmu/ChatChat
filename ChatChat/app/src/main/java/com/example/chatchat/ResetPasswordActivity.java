@@ -21,7 +21,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
     private Button mResendButton;
     FirebaseAuth mAuth;
     private boolean exist;
-    private int mNumPressed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +30,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
         mSendButton = findViewById(R.id.reset_password_send_button);
         mResendButton = findViewById(R.id.reset_password_resend_button);
         exist = true;
-        mNumPressed = 0;
         mAuth = FirebaseAuth.getInstance();
 
         mSendButton.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +75,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             if (task.getResult().getSignInMethods().isEmpty()) {
                                 exist = false;
-                                mEmail.setError("Email does not exist");
                             } else {
                                 exist = true;
                             }

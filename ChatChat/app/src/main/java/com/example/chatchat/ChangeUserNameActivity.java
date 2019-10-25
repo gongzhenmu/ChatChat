@@ -42,28 +42,17 @@ public class ChangeUserNameActivity extends AppCompatActivity {
     private void changeUserName(){
         if (!TextUtils.isEmpty(newUserNameInput.getText())){
             newUserName =  newUserNameInput.getText().toString().trim();
-            if(newUserName.length() > usernameLimit){
-                Toast.makeText(ChangeUserNameActivity.this, "Error. chat ID too long", Toast.LENGTH_LONG).show();
-            }
-            else if(newUserName.length() == 0){
-                Toast.makeText(ChangeUserNameActivity.this, "Error. Display name cannot be empty", Toast.LENGTH_LONG).show();
-            }
-            else if(!newUserName.matches("[A-Za-z0-9_]+")){
-                Toast.makeText(ChangeUserNameActivity.this, "Error. Invalid chat ID", Toast.LENGTH_LONG).show();
-            }
-            else {
-                currentUser = FirebaseAuth.getInstance().getCurrentUser();
-                userId = currentUser.getUid();
-                DocumentReference userNameRef = db.collection("Users").document(userId);
-                userNameRef
-                        .update("chatName", newUserName)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                launchMainPage();
-                            }
-                        });
-            }
+            currentUser = FirebaseAuth.getInstance().getCurrentUser();
+            userId = currentUser.getUid();
+            DocumentReference userNameRef = db.collection("Users").document(userId);
+            userNameRef
+                    .update("chatName", newUserName)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            launchMainPage();
+                        }
+                    });
         }
     }
     private void launchMainPage() {

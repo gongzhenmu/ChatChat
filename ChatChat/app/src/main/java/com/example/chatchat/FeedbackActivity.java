@@ -22,8 +22,8 @@ protected void onCreate(Bundle savedInstanceState) {
     submit.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if (bug.getText().toString().length() == 0 || feature.getText().toString().length() == 0)
-                return;
+//            if (bug.getText().toString().length() == 0 || feature.getText().toString().length() == 0)
+//                return;
             String feedback = composeFeedback(rating.getRating(), bug.getText().toString(), feature.getText().toString());
             Intent emailIntent = new Intent(Intent.ACTION_SEND);
             emailIntent.setData(Uri.parse("mailto:"));

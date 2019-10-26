@@ -90,7 +90,7 @@ public class SignUpActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        //Toast.makeText(SignUpActivity.this, "successfully create an account", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SignUpActivity.this, "successfully create an account", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(SignUpActivity.this, ExploreActivity.class);
                         startActivity(intent);
                         finish();
@@ -99,7 +99,7 @@ public class SignUpActivity extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(SignUpActivity.this, "fail to create an account", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(SignUpActivity.this, "fail to create an account", Toast.LENGTH_LONG).show();
                     }
                 });
     }

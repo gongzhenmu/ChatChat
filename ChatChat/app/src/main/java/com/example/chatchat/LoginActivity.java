@@ -43,10 +43,10 @@ public class LoginActivity extends AppCompatActivity {
                 email = emailInput.getText().toString().trim();
                 password = passwordInput.getText().toString().trim();
                 if(TextUtils.isEmpty(emailInput.getText())){
-                    Toast.makeText(LoginActivity.this, "Please enter a valid email", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(LoginActivity.this, "Please enter a valid email", Toast.LENGTH_LONG).show();
                 }
                 if(TextUtils.isEmpty(passwordInput.getText())){
-                    Toast.makeText(LoginActivity.this, "Please enter a valid password", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(LoginActivity.this, "Please enter a valid password", Toast.LENGTH_LONG).show();
                 }
                 if (!TextUtils.isEmpty(emailInput.getText()) && !TextUtils.isEmpty(passwordInput.getText())){
                     loginUser(email, password);
@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()){
                     launchMainPage();
                 }else {
-                    Toast.makeText(LoginActivity.this, "Failed to login", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(LoginActivity.this, "Failed to login", Toast.LENGTH_LONG).show();
                 }
             }
         });

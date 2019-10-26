@@ -44,14 +44,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 password = passwordInput.getText().toString().trim();
                 newPassword = newPasswordInput.getText().toString().trim();
                 newPassAgain = newPassAgainInput.getText().toString().trim();
-                if(newPassword.length() > newPassLenLimit){
-                    Toast.makeText(ChangePasswordActivity.this, "Error. Password too long", Toast.LENGTH_LONG).show();
-                }
-                else if(newPassword.length() == 0){
+                if(newPassword.length() == 0){
                     Toast.makeText(ChangePasswordActivity.this, "Error. Empty password not allowed", Toast.LENGTH_LONG).show();
-                }
-                else if(!newPassword.equals(newPassAgain)){
-                    Toast.makeText(ChangePasswordActivity.this, "Error. New passwords don't match", Toast.LENGTH_LONG).show();
                 }
                 else if (!TextUtils.isEmpty(newPasswordInput.getText()) && !TextUtils.isEmpty(passwordInput.getText())
                         && !TextUtils.isEmpty(newPasswordInput.getText())){

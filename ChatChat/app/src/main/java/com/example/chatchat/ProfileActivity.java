@@ -85,7 +85,7 @@ public class ProfileActivity extends AppCompatActivity {
                     if (myDoc.getString("imgurl") != null && myDoc.getString("imgurl").equals("")) {
                         Picasso.get().load(imgDir + "default-avatar.png?alt=media&token=af33a9b5-b4f4-4d44-8c1b-671caf2181c6").fit().into(imgProfilePic);
                     } else {
-                        Picasso.get().load(imgDir + myDoc.getString("imgurl")).fit().into(imgProfilePic);
+                        Picasso.get().load(imgDir + myDoc.getString("imgurl")).into(imgProfilePic);
                     }
 
                     txtName.setText(myDoc.getString("chatName"));
@@ -148,12 +148,12 @@ public class ProfileActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     private void logout(){
-        mAuth.signOut();
+       // mAuth.signOut();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+       // intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+               //| Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish();
+        //finish();
     }
 
     private void imageUpload(){
@@ -169,14 +169,14 @@ public class ProfileActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @Override
+    /*@Override
     public void onRestart()
     {  // After a pause OR at startup
         super.onRestart();
        //
        showProfile();
 
-    }
+    }*/
     @Override
     public void onBackPressed() {
         onSupportNavigateUp();

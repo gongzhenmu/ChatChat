@@ -49,7 +49,7 @@ public class SearchActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chatrooms.clear();
+                //chatrooms.clear();
                 adapter.notifyDataSetChanged();
                 Query chatroomQuery = db.collection("Chatroom").
                         orderBy("chatName", Query.Direction.ASCENDING).startAt( mSearch.getText().toString()).endAt(mSearch.getText().toString()+ "\uf8ff");

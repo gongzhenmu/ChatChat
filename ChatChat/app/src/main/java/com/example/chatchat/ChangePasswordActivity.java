@@ -67,8 +67,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
                                                 }
                                             }
                                         });
-                                    } else {
-                                        Toast.makeText(ChangePasswordActivity.this, "Error. Authentication failed", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });

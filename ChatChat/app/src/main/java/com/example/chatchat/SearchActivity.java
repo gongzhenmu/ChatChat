@@ -51,9 +51,10 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //chatrooms.clear();
                 adapter.notifyDataSetChanged();
-                Query chatroomQuery = db.collection("Chatroom").
+                Query chatroomQuery = db.collection("Chatroom").whereEqualTo("chatName", mSearch.getText().toString());
+                /*Query chatroomQuery = db.collection("Chatroom").
                         orderBy("chatName", Query.Direction.ASCENDING).startAt( mSearch.getText().toString()).endAt(mSearch.getText().toString()+ "\uf8ff");
-                Log.d("ChatroomList", "getting query from db");
+                Log.d("ChatroomList", "getting query from db");*/
                 chatroomQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
